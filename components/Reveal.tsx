@@ -34,7 +34,15 @@ export function Reveal({
     return () => io.disconnect();
   }, []);
 
-  const Comp = Tag as React.ElementType;
+  // Cast to a concrete props shape so children typing stays correct. (Adding
+  // @react-three/fiber augments the global JSX namespace, which otherwise makes
+  // a bare React.ElementType infer children as `never`.)
+  const Comp = Tag as unknown as React.ComponentType<{
+    ref?: React.Ref<HTMLElement>;
+    style?: React.CSSProperties;
+    className?: string;
+    children?: ReactNode;
+  }>;
   return (
     <Comp
       ref={ref}
