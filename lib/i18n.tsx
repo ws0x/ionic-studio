@@ -146,7 +146,7 @@ type Ctx = {
 const LocaleContext = createContext<Ctx | null>(null);
 
 export function LocaleProvider({ children }: { children: ReactNode }) {
-  const [locale, setLocaleState] = useState<Locale>("ar");
+  const [locale, setLocaleState] = useState<Locale>("en");
 
   useClientLayoutEffect(() => {
     const stored = window.localStorage.getItem("locale") as Locale | null;

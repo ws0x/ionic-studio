@@ -33,9 +33,9 @@ export function Nav() {
   }, [open]);
 
   const isActive = (href: string) => {
-    const base = href.split("#")[0];
-    if (base === "/" || base === "") return pathname === "/";
-    return pathname.startsWith(base);
+    if (href.includes("#")) return false; // scroll anchors are never page-active
+    if (href === "/") return pathname === "/";
+    return pathname.startsWith(href);
   };
 
   return (

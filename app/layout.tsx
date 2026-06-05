@@ -79,7 +79,7 @@ export const viewport: Viewport = {
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="ar" dir="rtl" suppressHydrationWarning>
+    <html lang="en" dir="ltr" suppressHydrationWarning>
       <body className={`${cormorant.variable} ${dmSans.variable} ${cairo.variable} antialiased`}>
         {children}
       </body>
