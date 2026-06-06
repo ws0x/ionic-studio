@@ -97,20 +97,29 @@ export function Footer() {
 
         {/* Bottom bar */}
         <div className="mt-14 border-t border-paper/10 pt-6">
-          <div className="flex flex-col gap-3 text-xs text-paper/35 sm:flex-row sm:items-center sm:justify-between">
-            <span>© {year} {site.name[locale]}. {t("footer.rights")}.</span>
-            <span>{t("footer.tagline")}</span>
-          </div>
-          <div className="mt-3 text-center text-xs text-paper/25">
-            {locale === "ar" ? "صُمّم وطُوِّر بواسطة " : "Crafted by "}
-            <a
-              href="https://www.binhakim.dev"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-paper/45 underline underline-offset-2 transition-colors hover:text-paper cursor-pointer"
-            >
-              binhakim.dev
-            </a>
+          <div className="flex flex-col gap-4 text-xs sm:flex-row sm:items-center sm:justify-between">
+            <span className="text-paper/35">© {year} {site.name[locale]}. {t("footer.rights")}.</span>
+            <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:gap-5">
+              <span className="text-paper/35">{t("footer.tagline")}</span>
+              <a
+                href="https://www.binhakim.dev"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group inline-flex items-center gap-1.5 text-paper/55 transition-colors hover:text-paper cursor-pointer"
+              >
+                <span className="text-paper/30">
+                  {locale === "ar" ? "صُمّم وطُوِّر بواسطة" : "Built by"}
+                </span>
+                <span className="font-semibold tracking-wide">binhakim.dev</span>
+                <svg
+                  width="10" height="10" viewBox="0 0 24 24" fill="none"
+                  stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"
+                  className="opacity-50 transition-opacity group-hover:opacity-100 rtl:rotate-[270deg]"
+                >
+                  <path d="M7 17L17 7M7 7h10v10" />
+                </svg>
+              </a>
+            </div>
           </div>
         </div>
       </div>
