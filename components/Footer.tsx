@@ -102,7 +102,7 @@ export function Footer() {
             <span>{t("footer.tagline")}</span>
           </div>
           <div className="mt-3 text-center text-xs text-paper/25">
-            {locale === "ar" ? "صُمّم وطُوِّر بواسطة " : "Designed & built by "}
+            {locale === "ar" ? "صُمّم وطُوِّر بواسطة " : "Crafted by "}
             <a
               href="https://www.binhakim.dev"
               target="_blank"
