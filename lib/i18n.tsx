@@ -24,6 +24,7 @@ export const dict = {
   "nav.founders":     { ar: "فريقنا",        en: "Our Team" },
   "nav.testimonials": { ar: "آراء العملاء",   en: "Testimonials" },
   "nav.contact":      { ar: "تواصل معنا",    en: "Contact" },
+  "nav.simulate":     { ar: "محاكاة ثلاثي الأبعاد", en: "3D Simulate" },
   "nav.quote":        { ar: "ابدأ مشروعك",   en: "Start Your Project" },
 
   // Hero

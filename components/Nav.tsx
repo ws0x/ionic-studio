@@ -12,6 +12,7 @@ const links = [
   { href: "/founders",     key: "nav.founders" },
   { href: "/testimonials", key: "nav.testimonials" },
   { href: "/#contact",     key: "nav.contact" },
+  { href: "/simulate",     key: "nav.simulate" },
 ] as const;
 
 export function Nav() {
@@ -48,10 +49,10 @@ export function Nav() {
 
         {/* Logo */}
         <Link href="/" className="group flex items-center gap-3 cursor-pointer" onClick={() => setOpen(false)}>
-          <span className="flex h-8 w-8 items-center justify-center rounded-full bg-ink">
-            <span className="font-display text-sm font-bold text-paper">I</span>
+          <span className="flex h-11 w-11 items-center justify-center rounded-full bg-ink sm:h-12 sm:w-12">
+            <span className="font-display text-base font-bold text-paper sm:text-lg">I</span>
           </span>
-          <span className={`text-sm font-semibold tracking-wide transition-colors ${scrolled ? "text-ink" : "text-paper"}`}>
+          <span className={`text-base font-semibold tracking-wide transition-colors sm:text-lg ${scrolled ? "text-ink" : "text-paper"}`}>
             {site.name[locale]}
           </span>
         </Link>
@@ -59,18 +60,36 @@ export function Nav() {
         {/* Desktop links */}
         <div className="hidden items-center gap-8 lg:flex">
           {links.map((l) => (
-            <Link
-              key={l.href}
-              href={l.href}
-              className={`relative text-xs font-medium uppercase tracking-[0.12em] transition-colors cursor-pointer ${
-                scrolled ? "text-ink" : "text-paper/80"
-              } hover:opacity-100 ${isActive(l.href) ? "opacity-100" : "opacity-60"}`}
-            >
-              {t(l.key)}
-              {isActive(l.href) && (
-                <span className={`absolute -bottom-1 inset-x-0 h-px ${scrolled ? "bg-ink" : "bg-paper"}`} />
-              )}
-            </Link>
+            l.href === "/simulate" ? (
+              <Link
+                key={l.href}
+                href={l.href}
+                className={`relative flex items-center gap-1.5 text-xs font-medium uppercase tracking-[0.12em] transition-colors cursor-pointer ${
+                  scrolled ? "text-ink" : "text-paper/80"
+                } hover:opacity-100 ${isActive(l.href) ? "opacity-100" : "opacity-60"}`}
+              >
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/>
+                </svg>
+                {t(l.key)}
+                {isActive(l.href) && (
+                  <span className={`absolute -bottom-1 inset-x-0 h-px ${scrolled ? "bg-ink" : "bg-paper"}`} />
+                )}
+              </Link>
+            ) : (
+              <Link
+                key={l.href}
+                href={l.href}
+                className={`relative text-xs font-medium uppercase tracking-[0.12em] transition-colors cursor-pointer ${
+                  scrolled ? "text-ink" : "text-paper/80"
+                } hover:opacity-100 ${isActive(l.href) ? "opacity-100" : "opacity-60"}`}
+              >
+                {t(l.key)}
+                {isActive(l.href) && (
+                  <span className={`absolute -bottom-1 inset-x-0 h-px ${scrolled ? "bg-ink" : "bg-paper"}`} />
+                )}
+              </Link>
+            )
           ))}
         </div>
 
