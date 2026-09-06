@@ -17,6 +17,7 @@ import { FoundersTeaser } from "@/components/FoundersTeaser";
 import { ClientLocations } from "@/components/ClientLocations";
 import CostEstimator from "@/components/CostEstimator";
 import BeforeAfter from "@/components/BeforeAfter";
+import { CareersSection } from "@/components/CareersSection";
 
 export default function Home() {
   return (
@@ -34,6 +35,7 @@ export default function Home() {
         <About />
         <FoundersTeaser />
         <Testimonials limit={3} showViewAll />
+        <CareersSection />
         <Quote />
         <Contact />
       </main>

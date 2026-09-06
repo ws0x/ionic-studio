@@ -62,11 +62,20 @@ export const services: Service[] = [
 ];
 
 // ─── Projects ─────────────────────────────────────────────────────────────────
+export type ProjectSector =
+  | "residential"
+  | "commercial"
+  | "office"
+  | "hospitality"
+  | "administration"
+  | "fb"
+  | "retail";
+
 export type Project = {
   title: Bi;
   desc: Bi;
   category: Bi;
-  categoryKey: "residential" | "commercial" | "office" | "hospitality";
+  categoryKey: ProjectSector;
   location: Bi;
   image: string;
   area?: string;
@@ -78,142 +87,179 @@ export type Project = {
 const U = (id: string, w = 1200) =>
   `https://images.unsplash.com/photo-${id}?auto=format&fit=crop&w=${w}&q=80`;
 
-export const projectFilters: { key: Project["categoryKey"] | "all"; label: Bi }[] = [
-  { key: "all", label: { ar: "الكل", en: "All" } },
-  { key: "residential", label: { ar: "سكني", en: "Residential" } },
-  { key: "commercial", label: { ar: "تجاري", en: "Commercial" } },
-  { key: "office", label: { ar: "مكاتب", en: "Office" } },
-  { key: "hospitality", label: { ar: "ضيافة", en: "Hospitality" } },
+export const projectFilters: { key: ProjectSector | "all"; label: Bi }[] = [
+  { key: "all", label: { ar: "جميع المشاريع", en: "All Projects" } },
+  { key: "administration", label: { ar: "إداري ومقرات", en: "Administration" } },
+  { key: "fb", label: { ar: "مطاعم وكافيهات (F&B)", en: "F&B" } },
+  { key: "retail", label: { ar: "تجاري ومتاجر", en: "Retail" } },
+  { key: "residential", label: { ar: "سكني وفيلات", en: "Residential" } },
 ];
 
 export const projects: Project[] = [
   {
-    title: { ar: "فيلا التجمع الخامس", en: "New Cairo Villa" },
+    title: { ar: "مقر شركة ڤاليو (Valu) — كامبس مايند هاوس", en: "Valu Headquarters — Mindhaus Campus" },
     desc: {
-      ar: "فيلا سكنية فاخرة بتصميم داخلي معاصر وتشطيبات بمواد إيطالية رخامية معمارية.",
-      en: "Luxury residential villa with contemporary interiors and Italian finishing materials.",
+      ar: "تنفيذ المقر الإداري الرئيسي لشركة فاليو بحلول إلكتروميكانيكية متطورة ومساحات عمل ذكية بمجمع ديستريكت 5.",
+      en: "Executive headquarters for Valu with advanced electromechanical systems and agile smart workspaces in District 5.",
     },
-    category: { ar: "سكني", en: "Residential" },
-    categoryKey: "residential",
-    location: { ar: "القاهرة الجديدة", en: "New Cairo" },
-    area: "650 m²",
+    category: { ar: "إداري ومقرات", en: "Administration" },
+    categoryKey: "administration",
+    location: { ar: "ديستريكت 5، القاهرة الجديدة", en: "District 5, New Cairo" },
+    area: "2,400 m²",
     year: "2025",
-    scope: { ar: "تشطيب كامل بمفتاح اليد + تصميم داخلي", en: "Turnkey Finishing + Interior Architecture" },
+    scope: { ar: "تشطيب مقرات إدارية متكامل + MEP + أوتوميشن", en: "Turnkey Corporate Fit-out + Advanced MEP" },
     highlights: [
-      { ar: "رخام ستاتوريو إيطالي للأرضيات", en: "Italian Statuario Marble Flooring" },
-      { ar: "أنظمة إضاءة ذكية مخفية", en: "Architectural Concealed Smart Lighting" },
-      { ar: "تكسيات خشبية وتوزيع فراغات مخصص", en: "Bespoke Acoustic Wall Paneling" },
-    ],
-    image: U("1600585154340-be6161a56a0c"),
-  },
-  {
-    title: { ar: "شقة الشيخ زايد", en: "Sheikh Zayed Penthouse" },
-    desc: {
-      ar: "بنتهاوس حديث بمساحات مفتوحة وأسقف مزدوجة الارتفاع وتوزيع إضاءة طبيعية مدروس.",
-      en: "Modern penthouse with open-plan living and double-height ceilings.",
-    },
-    category: { ar: "سكني", en: "Residential" },
-    categoryKey: "residential",
-    location: { ar: "الشيخ زايد", en: "Sheikh Zayed" },
-    area: "420 m²",
-    year: "2024",
-    scope: { ar: "تصميم داخلي + تنفيذ ديكورات متكاملة", en: "Interior Design + Turnkey Execution" },
-    highlights: [
-      { ar: "أسقف مزدوجة مع جبسوم بورد معلق", en: "Double-Height Ceilings & Custom Gypsum" },
-      { ar: "أرضيات باركيه خشب طبيعي معالج", en: "Engineered Hardwood Flooring" },
-      { ar: "مطبخ ودريسنج بتفصيل معماري", en: "Custom Minimalist Kitchen & Dressing" },
-    ],
-    image: U("1586023492125-27b2c045efd7"),
-  },
-  {
-    title: { ar: "مكاتب العاصمة الإدارية", en: "New Capital Corporate HQ" },
-    desc: {
-      ar: "مقر شركة بتصميم مؤسسي راقٍ يعكس هوية العلامة التجارية ويحقق أعلى معايير بيئة العمل.",
-      en: "Corporate headquarters with premium institutional design reflecting brand identity.",
-    },
-    category: { ar: "مكاتب", en: "Office" },
-    categoryKey: "office",
-    location: { ar: "العاصمة الإدارية", en: "New Capital" },
-    area: "1,200 m²",
-    year: "2024",
-    scope: { ar: "تشطيب مقرات ومكاتب متكامل (MEP + Fit-out)", en: "Complete Corporate Fit-out & MEP" },
-    highlights: [
-      { ar: "قواطع زجاجية عازلة للصوت", en: "Acoustic Glass Partitions" },
-      { ar: "قاعات اجتماعات ذكية بنظام أوتوميشن", en: "Automated Conference Suites" },
-      { ar: "أنظمة تكييف مركزي وكهرباء معتمدة", en: "Engineered Central HVAC & Electromechanical" },
+      { ar: "قواطع زجاجية معمارية عازلة للصوت 48dB", en: "Acoustic Double-Glazed Partitions (48dB)" },
+      { ar: "قاعات مؤتمرات ذكية بنظام تحكم كامل", en: "Integrated IoT Conference Hubs" },
+      { ar: "أسقف معدنية ومسارات إضاءة خطية مخصصة", en: "Architectural Baffle Ceilings & Linear LED" },
     ],
     image: U("1497366811353-6870744d04b2"),
   },
   {
-    title: { ar: "بوتيك المعادي", en: "Maadi Luxury Boutique" },
+    title: { ar: "مطعم ومخبز بول (PAUL) — أوبن إير مول", en: "PAUL French Bakery & Bistro — Open Air Mall" },
     desc: {
-      ar: "محل بيع بالتجزئة بتصميم يُحوّل تجربة التسوق إلى فن معماري ساحر وجذاب.",
-      en: "Retail boutique that transforms the shopping experience into an art form.",
+      ar: "تنفيذ وتشطيب فرع بول الفرنسي بطابع معماري باريسي فاخر، شاملاً صالة الطعام والتراس والمطبخ التجاري المتكامل.",
+      en: "Complete turnkey fit-out of PAUL Bistro blending authentic Parisian heritage with luxury commercial kitchen engineering.",
     },
-    category: { ar: "تجاري", en: "Commercial" },
-    categoryKey: "commercial",
-    location: { ar: "المعادي", en: "Maadi" },
-    area: "280 m²",
-    year: "2023",
-    scope: { ar: "تشطيب تجاري سريع بمواصفات عالمية", en: "Commercial Retail Fit-out" },
+    category: { ar: "مطاعم وكافيهات", en: "F&B" },
+    categoryKey: "fb",
+    location: { ar: "مدينتي، أوبن إير مول", en: "Madinaty, Open Air Mall" },
+    area: "480 m²",
+    year: "2024",
+    scope: { ar: "تشطيب مطاعم فاخرة (F&B Fit-out + Kitchen MEP)", en: "Fine F&B Fit-out & Industrial Kitchen MEP" },
     highlights: [
-      { ar: "واجهات زجاجية وتوزيع إضاءة مسرحي", en: "Custom Display Windows & Focal Lighting" },
-      { ar: "تشطيبات أسمنتية ميكروسيمنت فاخرة", en: "Premium Microcement Floor Finishes" },
+      { ar: "أرضيات موزايكو ورخام فرنسي مستورد", en: "Imported French Marble & Custom Mosaic Tile" },
+      { ar: "أعمال نجارة وكورنيش خشبية كلاسيكية معالجة", en: "Artisanal Millwork & Bespoke Moldings" },
+      { ar: "أنظمة شفط وتكييف مركزي متوافقة مع اشتراطات المول", en: "Mall-Compliant Heavy-Duty Kitchen HVAC" },
+    ],
+    image: U("1555396273-367ea4eb4db5"),
+  },
+  {
+    title: { ar: "متجر هوجو بوس (Hugo Boss) — مول مصر", en: "Hugo Boss Flagship Boutique — Mall of Egypt" },
+    desc: {
+      ar: "تنفيذ المتجر الرئيسي لعلامة هوجو بوس بأحدث أدلة التصميم العالمية، واستخدام خامات ألمانية وإضاءة مسرحية مركزة.",
+      en: "Flagship luxury boutique for Hugo Boss executed according to global design directives with precision lighting and German millwork.",
+    },
+    category: { ar: "تجاري ومتاجر", en: "Retail" },
+    categoryKey: "retail",
+    location: { ar: "مول مصر، 6 أكتوبر", en: "Mall of Egypt, 6th of October" },
+    area: "360 m²",
+    year: "2024",
+    scope: { ar: "تشطيب تجاري دولي فاخر (Luxury Fashion Retail)", en: "Haute Couture Flagship Fit-out" },
+    highlights: [
+      { ar: "واجهات زجاجية كريستالية بدون إطار", en: "Frameless Extra-Clear Glass Facades" },
+      { ar: "إضاءة بصرية موجهة بدرجة وضوح ألوان CRI>95", en: "High-CRI Architectural Accent Lighting" },
+      { ar: "تكسيات جدارية من الجلد الإيطالي والمعادن المصقولة", en: "Italian Leather & Brushed Bronze Wall Panels" },
     ],
     image: U("1441986300917-64674bd600d8"),
   },
   {
-    title: { ar: "منتجع الساحل الشمالي", en: "North Coast Resort Villa" },
+    title: { ar: "ستاربكس (Starbucks) — القطامية ريزيدنس", en: "Starbucks Drive-thru & Lounge — Kattameya" },
     desc: {
-      ar: "فيلا ساحلية بأسلوب معماري متوسطي مع لمسات معاصرة راقية ومقاومة للعوامل الجوية.",
-      en: "Coastal villa with Mediterranean architecture and refined contemporary touches.",
+      ar: "تنفيذ الفرع بأسلوب دافئ يدمج الخشب الطبيعي مع الإسمنت المعماري ومقاعد لاونج خارجية.",
+      en: "Iconic coffee lounge fit-out harmonizing warm natural timber, polished architectural concrete, and outdoor pergola.",
     },
-    category: { ar: "سكني", en: "Residential" },
-    categoryKey: "residential",
-    location: { ar: "الساحل الشمالي", en: "North Coast" },
-    area: "480 m²",
-    year: "2023",
-    scope: { ar: "تشطيب مصيفي متكامل وخامات مقاومة للرطوبة", en: "Coastal Turnkey Villa & Moisture-Proof Finishes" },
+    category: { ar: "مطاعم وكافيهات", en: "F&B" },
+    categoryKey: "fb",
+    location: { ar: "القطامية، القاهرة الجديدة", en: "Kattameya, New Cairo" },
+    area: "310 m²",
+    year: "2024",
+    scope: { ar: "تشطيب F&B متكامل سريع التنفيذ", en: "Rapid Turnkey F&B Execution" },
     highlights: [
-      { ar: "تراسات خارجية بحجر طبيعي معالج", en: "Weatherproof Natural Stone Terraces" },
-      { ar: "ألوان شاطئية وأخشاب التيك المقاومة", en: "Teak Accents & Mediterranean Palette" },
+      { ar: "أخشاب بلوط طبيعي معالجة ضد الحريق", en: "Fire-Rated Natural White Oak Cladding" },
+      { ar: "مسارات خدمة مجهزة بأنظمة تغذية وتصريف متقدمة", en: "High-Capacity Hydraulic & Plumbing System" },
     ],
-    image: U("1502672260266-1c1ef2d93688"),
+    image: U("1501339847302-ac426a4a7cbb"),
   },
   {
-    title: { ar: "مجمع ضيافة وسط البلد", en: "Downtown Hospitality Suite" },
+    title: { ar: "بوتيك فيليب بلين (Philipp Plein)", en: "Philipp Plein Luxury Boutique" },
     desc: {
-      ar: "فضاء ضيافة فاخر يمزج بين التراث المصري والأناقة المعاصرة.",
-      en: "Luxury hospitality space blending Egyptian heritage with contemporary elegance.",
+      ar: "متجر الأزياء الراقية بتصميم جريء يعتمد على الرخام الأسود والمرايا الكريستالية والإضاءة الديناميكية.",
+      en: "Haute couture boutique featuring dramatic Nero Marquina marble, custom polished steel, and crystal accents.",
     },
-    category: { ar: "ضيافة", en: "Hospitality" },
-    categoryKey: "hospitality",
-    location: { ar: "وسط البلد", en: "Downtown Cairo" },
-    area: "340 m²",
-    image: U("1631049307264-da0ec9d70304"),
+    category: { ar: "تجاري ومتاجر", en: "Retail" },
+    categoryKey: "retail",
+    location: { ar: "القاهرة الجديدة", en: "New Cairo" },
+    area: "275 m²",
+    year: "2024",
+    scope: { ar: "تشطيب تجاري فائق الفخامة", en: "Luxury High-Street Retail Fit-out" },
+    highlights: [
+      { ar: "رخام نيرو ماركينا أسود مع عروق بيضاء نقية", en: "Nero Marquina Bookmatched Slabs" },
+      { ar: "عناصر ديكورية من الفولاذ المقاوم للصدأ المطلي بالكروم", en: "Mirror-Finish Stainless Steel Displays" },
+    ],
+    image: U("1512436991641-6745cdb1723f"),
   },
   {
-    title: { ar: "مساحة عمل مشتركة", en: "Premium Co-working Space" },
+    title: { ar: "فيلا مستقلة — إعمار ميفيدا (Mivida)", en: "Stand-Alone Signature Villa — Emaar Mivida" },
     desc: {
-      ar: "مساحة عمل معاصرة تعزز الإنتاجية والإلهام في آنٍ واحد.",
-      en: "Contemporary work environment designed to boost productivity and inspire creativity.",
+      ar: "فيلا سكنية فاخرة بتصميم معماري حديث وتشطيبات رخام ستاتوريو إيطالي وحمام سباحة إنفينيتي.",
+      en: "Ultra-luxury residential villa featuring Italian Statuario marble, floor-to-ceiling panoramic glass, and infinity pool.",
     },
-    category: { ar: "مكاتب", en: "Office" },
-    categoryKey: "office",
-    location: { ar: "أكتوبر", en: "6th of October" },
-    area: "560 m²",
+    category: { ar: "سكني وفيلات", en: "Residential" },
+    categoryKey: "residential",
+    location: { ar: "كمبوند ميفيدا، القاهرة الجديدة", en: "Mivida Compound, New Cairo" },
+    area: "720 m²",
+    year: "2025",
+    scope: { ar: "تشطيب كامل بمفتاح اليد + تصميم معماري داخلي", en: "Turnkey Architecture & Interior Finishing" },
+    highlights: [
+      { ar: "رخام ستاتوريو إيطالي للأرضيات الرئيسية", en: "Italian Statuario Marble Flooring" },
+      { ar: "أنظمة أوتوميشن ومنزل ذكي KNX متكاملة", en: "Full KNX Smart Home Automation" },
+      { ar: "أبواب وشبابيك عازلة للصوت والحرارة بأعلى تصنيف", en: "Thermal-Break Acoustic Architectural Windows" },
+    ],
+    image: U("1600585154340-be6161a56a0c"),
+  },
+  {
+    title: { ar: "فيلا ماونتن فيو آي سيتي (Mountain View)", en: "Mountain View iCity Villa" },
+    desc: {
+      ar: "فيلا بتشطيبات راقية بتصميم الحد الأدنى الدافئ وأسقف معلقة وإضاءة معمارية مخفية مدروسة.",
+      en: "Warm minimalist villa with custom suspended ceilings, continuous architectural cove lighting, and natural stone.",
+    },
+    category: { ar: "سكني وفيلات", en: "Residential" },
+    categoryKey: "residential",
+    location: { ar: "ماونتن فيو، القاهرة الجديدة", en: "Mountain View, New Cairo" },
+    area: "380 m²",
+    year: "2025",
+    scope: { ar: "تشطيب سكني راقٍ بمفتاح اليد", en: "Premium Turnkey Finishing" },
+    highlights: [
+      { ar: "إضاءة مغناطيسية مسارية خافتة التوهج", en: "Magnetic Architectural Track Lighting" },
+      { ar: "أرضيات باركيه خشب طبيعي معالج", en: "Engineered European Oak Hardwood" },
+    ],
+    image: U("1586023492125-27b2c045efd7"),
+  },
+  {
+    title: { ar: "مقر شركة إيديكس الهندسية (EDECS)", en: "EDECS Marine & Engineering Headquarters" },
+    desc: {
+      ar: "مقر مؤسسي ضخم يجمع بين قاعات الإدارة والمختبرات الفنية ومراكز التخطيط الاستراتيجي للمشاريع القومية.",
+      en: "Corporate engineering complex housing executive boardrooms, technical project labs, and mission-critical MEP infrastructure.",
+    },
+    category: { ar: "إداري ومقرات", en: "Administration" },
+    categoryKey: "administration",
+    location: { ar: "القاهرة الجديدة", en: "New Cairo" },
+    area: "3,100 m²",
+    year: "2024",
+    scope: { ar: "مقاولات عامة وتشطيب إداري ثقيل", en: "General Contracting & Turnkey Institutional Fit-out" },
+    highlights: [
+      { ar: "غرف خوادم ومراكز بيانات مجهزة بأنظمة إطفاء FM200", en: "Mission-Critical Tier III Server Suites (FM200)" },
+      { ar: "واجهات ستائرية زجاجية معالجة حرارياً", en: "Double-Skin High-Performance Curtain Wall" },
+    ],
     image: U("1497215728101-856f4ea42174"),
   },
   {
-    title: { ar: "عيادة طبية متكاملة", en: "Premium Medical Clinic" },
+    title: { ar: "متجر كيكو ميلانو (KIKO Milano) — سيتي ستارز", en: "KIKO Milano Flagship — Citystars" },
     desc: {
-      ar: "عيادة طبية بتصميم يوازن بين الحياد العلمي والدفء الإنساني.",
-      en: "Medical clinic balancing clinical neutrality with human warmth.",
+      ar: "تنفيذ أحدث هوية تجارية لعلامة مستحضرات التجميل الإيطالية بمحاذاة المعايير الهندسية لمراكز التسوق الكبرى.",
+      en: "Italian cosmetics boutique built to international chain specifications with glossy lacquer displays and high-lumen illumination.",
     },
-    category: { ar: "تجاري", en: "Commercial" },
-    categoryKey: "commercial",
-    location: { ar: "مدينة نصر", en: "Nasr City" },
-    area: "310 m²",
+    category: { ar: "تجاري ومتاجر", en: "Retail" },
+    categoryKey: "retail",
+    location: { ar: "سيتي ستارز، مدينة نصر", en: "Citystars, Nasr City" },
+    area: "190 m²",
+    year: "2023",
+    scope: { ar: "تشطيب تجاري دقيق وسريع", en: "High-Traffic Commercial Retail Execution" },
+    highlights: [
+      { ar: "أثاث عرض مدهون بطلاء بولي يوريثان لامع عالي التحمل", en: "High-Gloss Polyurethane Custom Product Podiums" },
+      { ar: "مرايا إضاءة متوازنة تحاكي ضوء النهار الطبيعي 5000K", en: "5000K Daylight Color-Calibrated Vanity Mirrors" },
+    ],
     image: U("1505693416388-ac5ce068fe85"),
   },
 ];

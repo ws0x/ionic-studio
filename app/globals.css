@@ -15,6 +15,13 @@
   --color-line: #e4e4e0;
   --color-line-dark: rgba(255, 255, 255, 0.1);
 
+  /* Reference Architectural Palette */
+  --color-bronze: #ac8c66;
+  --color-bronze-light: #c9aa82;
+  --color-obsidian: #000000;
+  --color-surface-dark: #0a0a0a;
+  --color-surface-card: #141414;
+
   /* Typography */
   --font-display: var(--font-cormorant), "Georgia", serif;
   --font-arabic: var(--font-cairo), system-ui, sans-serif;
@@ -293,3 +300,26 @@ html[dir="rtl"] .eyebrow::before { order: 2; }
   height: 1px;
   background: var(--color-silver);
 }
+
+/* ── Reference-Egypt Architectural Utilities ─────────────────────────────── */
+.text-stroke-light {
+  -webkit-text-stroke: 1.5px rgba(255, 255, 255, 0.35);
+  color: transparent;
+}
+.text-stroke-dark {
+  -webkit-text-stroke: 1.5px rgba(0, 0, 0, 0.22);
+  color: transparent;
+}
+.architectural-grid {
+  background-size: 40px 40px;
+  background-image: 
+    linear-gradient(to right, rgba(255, 255, 255, 0.04) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+}
+.architectural-grid-light {
+  background-size: 40px 40px;
+  background-image: 
+    linear-gradient(to right, rgba(0, 0, 0, 0.03) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(0, 0, 0, 0.03) 1px, transparent 1px);
+}
+

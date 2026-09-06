@@ -11,8 +11,12 @@ export const site = {
   phone2: "+20 106 048 3860",
   email: "info@ionicdesignhouse.com",
   address: {
-    ar: "دمياط، جمهورية مصر العربية",
-    en: "Damietta, Egypt",
+    ar: "كامبس مايند هاوس B11، ديستريكت 5، مراكز، طريق السخنة، القطامية الجديدة، القاهرة",
+    en: "B11 Mindhaus Campus, District 5, Marakez, New Kattameya, Cairo, Egypt",
+  },
+  secondaryAddress: {
+    ar: "استوديو التصميم وورش التنفيذ: دمياط، مصر",
+    en: "Design Studio & Fabrication: Damietta, Egypt",
   },
   social: {
     instagram: "https://www.instagram.com/ionicdesignhouse",

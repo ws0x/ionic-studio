@@ -20,7 +20,10 @@ type Dict = Record<string, { ar: string; en: string }>;
 export const dict = {
   // Navigation
   "nav.home":         { ar: "الرئيسية",      en: "Home" },
+  "nav.about":        { ar: "عن أيونيك",     en: "About" },
   "nav.projects":     { ar: "أعمالنا",       en: "Projects" },
+  "nav.team":         { ar: "فريق العمل",    en: "Team" },
+  "nav.careers":      { ar: "انضم إلينا",    en: "Careers" },
   "nav.founders":     { ar: "فريقنا",        en: "Our Team" },
   "nav.testimonials": { ar: "آراء العملاء",   en: "Testimonials" },
   "nav.contact":      { ar: "تواصل معنا",    en: "Contact" },
@@ -29,6 +32,8 @@ export const dict = {
   "nav.quote":        { ar: "ابدأ مشروعك",   en: "Start Your Project" },
 
   // Hero
+  "hero.badge":      { ar: "مرجعية معمارية وتشطيبات فائقة الدقة", en: "Architectural Benchmark & Fine Fit-Outs" },
+  "hero.playVideo":  { ar: "مشاهدة العرض المعماري", en: "Play Showreel" },
   "hero.eyebrow":    { ar: "تصميم · تشطيب · إنشاء", en: "Design · Finishing · Construction" },
   "hero.title":      { ar: "نحوّل المساحات إلى تحف معمارية", en: "We turn spaces into masterpieces" },
   "hero.subtitle":   {

@@ -8,9 +8,10 @@ import { site, waLink } from "@/lib/site";
 
 const links = [
   { href: "/",             key: "nav.home" },
+  { href: "/about",        key: "nav.about" },
   { href: "/projects",     key: "nav.projects" },
-  { href: "/founders",     key: "nav.founders" },
-  { href: "/testimonials", key: "nav.testimonials" },
+  { href: "/team",         key: "nav.team" },
+  { href: "/#careers",     key: "nav.careers" },
   { href: "/#contact",     key: "nav.contact" },
   { href: "/simulate",     key: "nav.simulate" },
   { href: "/track",        key: "nav.track" },

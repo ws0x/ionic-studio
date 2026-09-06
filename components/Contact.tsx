@@ -45,7 +45,10 @@ export function Contact() {
                 <span className="font-semibold">{site.email}</span>
               </InfoRow>
               <InfoRow label={t("contact.address")} icon="M12 21s7-6.4 7-11a7 7 0 10-14 0c0 4.6 7 11 7 11z">
-                <span className="font-semibold">{site.address[locale]}</span>
+                <div>
+                  <span className="font-semibold block">{site.address[locale]}</span>
+                  <span className="text-xs text-platinum block mt-0.5">{site.secondaryAddress[locale]}</span>
+                </div>
               </InfoRow>
               <InfoRow label={t("contact.hours")} icon="M12 8v4l3 2M21 12a9 9 0 11-18 0 9 9 0 0118 0z">
                 <span className="font-semibold">{site.hours[locale]}</span>
