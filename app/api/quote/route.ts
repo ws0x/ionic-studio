@@ -44,11 +44,11 @@ export async function POST(request: Request) {
       id,
       name,
       phone,
-      type: body.type?.trim() || "unspecified",
-      stage: body.stage?.trim() || "unspecified",
-      area: body.area?.trim() || "",
-      city: body.city?.trim() || "",
-      details: body.details?.trim() || "",
+      type: body.type != null ? String(body.type).trim() : "unspecified",
+      stage: body.stage != null ? String(body.stage).trim() : "unspecified",
+      area: body.area != null ? String(body.area).trim() : "",
+      city: body.city != null ? String(body.city).trim() : "",
+      details: body.details != null ? String(body.details).trim() : "",
       createdAt,
     };
 
