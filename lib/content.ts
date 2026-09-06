@@ -2,10 +2,10 @@ export type Bi = { ar: string; en: string };
 
 // ─── Stats ───────────────────────────────────────────────────────────────────
 export const stats: { value: string; label: Bi }[] = [
-  { value: "250+", label: { ar: "مشروع منجز", en: "Projects delivered" } },
-  { value: "12", label: { ar: "سنة خبرة", en: "Years of expertise" } },
-  { value: "98%", label: { ar: "نسبة رضا العملاء", en: "Client satisfaction" } },
-  { value: "40+", label: { ar: "خبير ومهندس", en: "Experts & engineers" } },
+  { value: "15+", label: { ar: "عاماً من الخبرة المعمارية", en: "Years Construction Excellence" } },
+  { value: "+30", label: { ar: "علامة تجارية دولية ومؤسسية", en: "International & Enterprise Brands" } },
+  { value: "180+", label: { ar: "مشروع تسليم مفتاح منجز", en: "Turnkey Projects Delivered" } },
+  { value: "99.4%", label: { ar: "نسبة الالتزام بالجدول الزمني", en: "On-Time Handover Compliance" } },
 ];
 
 // ─── Services ─────────────────────────────────────────────────────────────────
@@ -13,50 +13,50 @@ export type Service = { icon: string; title: Bi; desc: Bi };
 export const services: Service[] = [
   {
     icon: "M3 21h18M5 21V7l8-4 8 4v14M9 21v-6h6v6",
-    title: { ar: "تشطيبات متكاملة", en: "Full Finishing" },
+    title: { ar: "مقاولات عامة وإنشاءات كبرى", en: "General Contracting & Civil Works" },
     desc: {
-      ar: "تشطيب الوحدة بالكامل من المحارة حتى التسليم بمفتاح اليد بمواد راقية.",
-      en: "Complete unit finishing from plaster to turnkey handover with premium materials.",
+      ar: "تنفيذ المشاريع الإنشائية والتوسعات الهيكلية والخرسانات بأعلى اشتراطات الجودة والسلامة المهنية.",
+      en: "Full-scale structural execution, building works, and structural modifications compliant with rigorous engineering standards.",
     },
   },
   {
     icon: "M4 7h16M4 12h16M4 17h10",
-    title: { ar: "تصميم داخلي", en: "Interior Design" },
+    title: { ar: "تشطيبات وتجهيزات معمارية متكاملة", en: "Turnkey Fine Finishing & Fit-Outs" },
     desc: {
-      ar: "تصاميم ثلاثية الأبعاد تترجم ذوقك إلى واقع قبل البدء في التنفيذ.",
-      en: "3D concepts that translate your vision into reality before a single wall is touched.",
+      ar: "إدارة متكاملة للتجهيزات الداخلية من العظم والمحارة حتى التسليم النهائي بالمفتاح بأدق المواصفات العالمية.",
+      en: "Comprehensive interior fit-out management from core & shell to turnkey handover with world-class craftsmanship.",
     },
   },
   {
-    icon: "M12 3l9 6-9 6-9-6 9-6zM3 15l9 6 9-6",
-    title: { ar: "ديكورات جبس وأسقف", en: "Gypsum & Ceilings" },
+    icon: "M13 10V3L4 14h7v7l9-11h-7z",
+    title: { ar: "أنظمة كهروميكانيكية متطورة (MEP)", en: "Electro-Mechanical & MEP Systems" },
     desc: {
-      ar: "أسقف معلقة وبارتيشن وكرانيش بتفاصيل حِرفية وإضاءة مخفية.",
-      en: "Suspended ceilings, partitions and cornices with artisanal detail and hidden lighting.",
+      ar: "تصميم وتنفيذ أنظمة التكييف المركزي HVAC، شبكات مكافحة الحريق المعتمدة، غرف الخوادم، والأنظمة الذكية.",
+      en: "Design and installation of central HVAC, certified fire fighting, BMS automation, and mission-critical electrical networks.",
     },
   },
   {
     icon: "M3 10h18M7 10V6a5 5 0 0110 0v4M5 10v11h14V10",
-    title: { ar: "مطابخ ودريسنج", en: "Kitchens & Dressing" },
+    title: { ar: "تجهيز المقرات وسلاسل المطاعم والمتاجر", en: "Commercial F&B & Retail Rollouts" },
     desc: {
-      ar: "مطابخ ودريسنج بتصميم عملي وخامات تدوم لسنوات.",
-      en: "Kitchens and dressing rooms with functional layouts and enduring materials.",
+      ar: "تنفيذ فروع كبرى العلامات العالمية (سلاسل الكافيهات، المطاعم، والمتاجر الفاخرة) بجداول زمنية قياسية.",
+      en: "Rapid, high-precision deployment for global luxury retailers, corporate headquarters, and F&B culinary venues.",
     },
   },
   {
-    icon: "M9 21V9h6v12M4 21V3h16v18",
-    title: { ar: "دهانات وحوائط فاخرة", en: "Paint & Wall Finishes" },
+    icon: "M12 3l9 6-9 6-9-6 9-6zM3 15l9 6 9-6",
+    title: { ar: "أعمال النجارة والتكسيات والرخام المعماري", en: "Bespoke Millwork & Architectural Stone" },
     desc: {
-      ar: "دهانات بجودة معمارية، ورق جدران، وتشطيبات حوائط استثنائية.",
-      en: "Architectural-grade paints, designer wallpaper, and exceptional wall treatments.",
+      ar: "تصنيع أرقى التكسيات الخشبية العازلة للصوت، الرخام الإيطالي المعالج، والواجهات الزجاجية المعمارية.",
+      en: "Custom acoustic wall paneling, precision Italian marble fabrication, and architectural extra-clear glazing.",
     },
   },
   {
     icon: "M6 3h12l3 7-9 11L3 10z",
-    title: { ar: "أعمال إنشائية", en: "Construction Works" },
+    title: { ar: "الفيلات والقصور السكنية المستقلة", en: "Ultra-Luxury Residential Estates" },
     desc: {
-      ar: "بناء وتعديل وترميم بإشراف هندسي معتمد وضمان على الأعمال.",
-      en: "Building, modification and renovation under certified engineering supervision.",
+      ar: "تحويل القصور والفيلات في كبرى المجمعات السكنية إلى تحف معمارية بخصوصية استثنائية وأنظمة ذكية.",
+      en: "Bespoke architectural architecture for private villas and estates with KNX home automation and infinity terraces.",
     },
   },
 ];

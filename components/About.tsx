@@ -1,71 +1,121 @@
 "use client";
 
 import Image from "next/image";
-import { useLocale, type DictKey } from "@/lib/i18n";
-import { SectionHeading } from "./SectionHeading";
+import Link from "next/link";
+import { useLocale } from "@/lib/i18n";
 import { Reveal } from "./Reveal";
 
-const features: DictKey[] = ["about.f1", "about.f2", "about.f3", "about.f4"];
-
 export function About() {
-  const { t } = useLocale();
+  const { locale } = useLocale();
 
   return (
-    <section id="about" className="bg-paper py-24 md:py-36">
-      <div className="mx-auto grid max-w-7xl items-center gap-16 px-5 sm:px-8 lg:grid-cols-2">
-        {/* Image */}
-        <Reveal className="relative">
-          <div className="relative aspect-[3/4] overflow-hidden rounded-2xl">
-            <Image
-              src="https://images.unsplash.com/photo-1503387762-592deb58ef4e?auto=format&fit=crop&w=900&q=80"
-              alt="Ionic Design House architecture studio interior"
-              fill
-              sizes="(max-width: 1024px) 100vw, 50vw"
-              className="object-cover grayscale transition-transform duration-700 hover:scale-[1.02]"
-            />
-          </div>
-          {/* Floating stat badge */}
-          <div className="absolute -bottom-6 -end-0 rounded-2xl bg-ink px-6 py-5 text-paper lg:-end-8">
-            <span className="font-display text-4xl font-bold leading-none">12+</span>
-            <p className="mt-1 text-[11px] uppercase tracking-[0.15em] text-paper/60">{t("stats.years")}</p>
-          </div>
-          {/* Floating inset image */}
-          <div className="absolute -top-6 -start-0 hidden h-36 w-36 overflow-hidden rounded-2xl border-4 border-paper shadow-2xl lg:-start-8 lg:block">
-            <Image
-              src="https://images.unsplash.com/photo-1581094794329-c8112a89af12?auto=format&fit=crop&w=400&q=80"
-              alt="Ionic Design House project detail"
-              fill
-              sizes="144px"
-              className="object-cover grayscale"
-            />
-          </div>
-        </Reveal>
+    <section id="about" className="relative overflow-hidden bg-neutral-950 py-24 md:py-36 text-white border-t border-white/10">
+      {/* Background Architectural Watermark */}
+      <div className="pointer-events-none absolute -top-12 inset-x-0 select-none overflow-hidden text-center opacity-5">
+        <span className="text-stroke-light font-bold uppercase tracking-tighter text-[16vw] leading-none whitespace-nowrap">
+          EXPERIENCE OVERVIEW
+        </span>
+      </div>
 
-        {/* Text */}
-        <div>
-          <SectionHeading
-            eyebrow={t("about.eyebrow")}
-            title={t("about.title")}
-          />
-          <Reveal className="mt-6 space-y-4">
-            <p className="text-base leading-loose text-platinum">{t("about.body1")}</p>
-            <p className="text-base leading-loose text-platinum">{t("about.body2")}</p>
+      <div className="relative z-10 mx-auto max-w-7xl px-6 sm:px-12">
+        <div className="grid grid-cols-1 items-center gap-16 lg:grid-cols-12 lg:gap-16">
+          {/* Architectural Image Presentation */}
+          <Reveal className="relative lg:col-span-5">
+            <div className="relative aspect-[4/5] overflow-hidden rounded-none border border-white/15 bg-black">
+              <Image
+                src="https://images.unsplash.com/photo-1503387762-592deb58ef4e?auto=format&fit=crop&w=1000&q=80"
+                alt="Ionic Studio Architecture & Contracting"
+                fill
+                sizes="(max-width: 1024px) 100vw, 45vw"
+                className="object-cover grayscale transition-transform duration-700 hover:scale-[1.03] brightness-90"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black via-black/30 to-transparent" />
+              
+              {/* Overlay Stat Counter */}
+              <div className="absolute bottom-0 inset-x-0 p-8 border-t border-white/10 bg-black/80 backdrop-blur-sm">
+                <span className="font-mono text-4xl sm:text-5xl font-bold text-white block">15+</span>
+                <span className="text-xs uppercase tracking-widest text-bronze-light block mt-1">
+                  {locale === "ar" ? "عاماً من الريادة في المقاولات والتشطيبات" : "Years of Turnkey Contracting Excellence"}
+                </span>
+              </div>
+            </div>
           </Reveal>
 
-          <div className="mt-10 grid grid-cols-1 gap-4 sm:grid-cols-2">
-            {features.map((f, i) => (
-              <Reveal key={f} delay={i * 60} className="flex items-start gap-3">
-                <span className="mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-ink">
-                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
-                    <path d="M20 6L9 17l-5-5" />
-                  </svg>
+          {/* Architectural Text & Credentials */}
+          <div className="lg:col-span-7">
+            <div className="flex items-center gap-3 mb-3">
+              <span className="h-2 w-2 bg-bronze" />
+              <span className="text-xs font-bold uppercase tracking-widest text-bronze-light">
+                {locale === "ar" ? "— أكثر من 15 عاماً من الخبرة" : "— More Than 15 Years of Experience"}
+              </span>
+            </div>
+
+            <h2 className="text-3xl sm:text-5xl font-bold uppercase tracking-tight text-white leading-tight">
+              {locale === "ar" ? "مقاولون معتمدون للمشاريع المعمارية الكبرى" : "Premier Contractor for Landmark Architecture"}
+            </h2>
+
+            <div className="mt-6 space-y-4 text-sm sm:text-base leading-relaxed text-white/70">
+              <p>
+                {locale === "ar"
+                  ? "تعد أيونيك للمقاولات والتشطيبات الفاخرة شريكاً موثوقاً لكبرى الشركات العالمية والمحلية في مصر. نجمع بين المقاولات الإنشائية، التجهيزات المعمارية الدقيقة (Fit-Outs)، والأعمال الكهروميكانيكية المتطورة (MEP) لتسليم مشاريع مستدامة لا تقبل المساومة على الجودة."
+                  : "Ionic Building and Finishing is a leading contractor renowned for excellence in construction, fine finishing, and turnkey fit-outs. Our expertise lies in delivering sustainable commercial, institutional, and luxury residential projects marked by engineering precision and on-time delivery."}
+              </p>
+              <p>
+                {locale === "ar"
+                  ? "يمتد سجل إنجازاتنا عبر قطاعات البنوك، المقرات الإدارية، سلاسل المطاعم والمقاهي الراقية، المتاجر العالمية، والفيلات السكنية الفاخرة في القاهرة الجديدة والشيخ زايد والعاصمة الإدارية."
+                  : "Our multidisciplinary portfolio spans corporate headquarters, international F&B chains, haute couture fashion boutiques, and ultra-luxury private residences across Egypt's prime master-planned compounds."}
+              </p>
+            </div>
+
+            {/* Credentials Badges */}
+            <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 gap-4 border-y border-white/10 py-6">
+              <div className="flex items-center gap-3">
+                <span className="h-1.5 w-1.5 bg-bronze" />
+                <span className="text-xs uppercase tracking-wider font-semibold text-white/90">
+                  {locale === "ar" ? "تسليم بمفتاح اليد دون وسطاء" : "Turnkey Direct Handover"}
                 </span>
-                <span className="text-sm font-medium text-ink">{t(f)}</span>
-              </Reveal>
-            ))}
+              </div>
+              <div className="flex items-center gap-3">
+                <span className="h-1.5 w-1.5 bg-bronze" />
+                <span className="text-xs uppercase tracking-wider font-semibold text-white/90">
+                  {locale === "ar" ? "أنظمة MEP وهندسة كهروميكانيكية متطورة" : "Certified MEP & Electromechanical"}
+                </span>
+              </div>
+              <div className="flex items-center gap-3">
+                <span className="h-1.5 w-1.5 bg-bronze" />
+                <span className="text-xs uppercase tracking-wider font-semibold text-white/90">
+                  {locale === "ar" ? "+30 علامة تجارية ومؤسسة دولية" : "+30 Enterprise & Global Brands"}
+                </span>
+              </div>
+              <div className="flex items-center gap-3">
+                <span className="h-1.5 w-1.5 bg-bronze" />
+                <span className="text-xs uppercase tracking-wider font-semibold text-white/90">
+                  {locale === "ar" ? "ضمان هندسي موثق ومعتمد" : "Comprehensive Engineering Warranty"}
+                </span>
+              </div>
+            </div>
+
+            <div className="mt-8 flex items-center gap-6">
+              <Link
+                href="/about"
+                className="inline-flex h-12 items-center justify-center border border-white bg-white px-8 text-xs font-bold uppercase tracking-widest text-black transition-all hover:bg-transparent hover:text-white"
+              >
+                {locale === "ar" ? "نبذة كاملة عن الشركة" : "Explore Full Profile"}
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" className="ms-2 rtl:rotate-180">
+                  <path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                </svg>
+              </Link>
+              <Link
+                href="/team"
+                className="text-xs font-bold uppercase tracking-widest text-white/60 hover:text-bronze-light transition-colors"
+              >
+                {locale === "ar" ? "الهيكل الإداري وفريق العمل ←" : "Leadership & PMO Team →"}
+              </Link>
+            </div>
           </div>
         </div>
       </div>
     </section>
   );
 }
+
