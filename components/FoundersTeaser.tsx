@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { useLocale } from "@/lib/i18n";
 import { founders } from "@/lib/content";
@@ -34,12 +35,13 @@ export function FoundersTeaser() {
             >
               <div className="flex flex-col sm:flex-row">
                 {/* Portrait */}
-                <div className="aspect-[3/4] w-full overflow-hidden sm:aspect-auto sm:h-auto sm:w-48 shrink-0">
-                  <img
+                <div className="relative aspect-[3/4] w-full overflow-hidden sm:aspect-auto sm:h-auto sm:min-h-[240px] sm:w-48 shrink-0">
+                  <Image
                     src={f.image}
                     alt={`${f.name.en}, ${f.title.en}, Ionic Design House`}
-                    loading="lazy"
-                    className="h-full w-full object-cover object-top grayscale transition-transform duration-700 group-hover:scale-[1.03]"
+                    fill
+                    sizes="(max-width: 640px) 100vw, 192px"
+                    className="object-cover object-top grayscale transition-transform duration-700 group-hover:scale-[1.03]"
                   />
                 </div>
                 {/* Info */}

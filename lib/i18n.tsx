@@ -25,6 +25,7 @@ export const dict = {
   "nav.testimonials": { ar: "آراء العملاء",   en: "Testimonials" },
   "nav.contact":      { ar: "تواصل معنا",    en: "Contact" },
   "nav.simulate":     { ar: "محاكاة ثلاثي الأبعاد", en: "3D Simulate" },
+  "nav.track":        { ar: "تتبع مشروعك",   en: "Track Project" },
   "nav.quote":        { ar: "ابدأ مشروعك",   en: "Start Your Project" },
 
   // Hero
@@ -58,6 +59,15 @@ export const dict = {
   "work.all":      { ar: "الكل",                         en: "All" },
   "work.viewAll":  { ar: "استعرض جميع المشاريع",         en: "View all projects" },
   "work.area":     { ar: "المساحة",                      en: "Area" },
+  "work.simulateCTA": { ar: "جرّب في 3D",                en: "Simulate in 3D" },
+
+  // Locations / Developments (inspired by reference benchmark)
+  "locations.eyebrow":  { ar: "نطاق العمل",                          en: "Where we build" },
+  "locations.title":    { ar: "مشاريعنا في أرقى الوجهات بمصر",       en: "Delivering across Egypt's premier destinations" },
+  "locations.subtitle": {
+    ar: "من المجمعات السكنية الراقية بالقاهرة الجديدة والشيخ زايد إلى مقرات العاصمة الإدارية وشاليهات الساحل.",
+    en: "From premier residential compounds in New Cairo and Zayed to corporate offices in the New Capital and coastal retreats.",
+  },
 
   // About
   "about.eyebrow": { ar: "من نحن",                          en: "Who we are" },
@@ -111,6 +121,46 @@ export const dict = {
   "quote.submit":     { ar: "أرسل عبر واتساب",  en: "Send via WhatsApp" },
   "quote.required":   { ar: "الرجاء إدخال الاسم ورقم الهاتف.", en: "Please enter your name and phone." },
   "quote.selectType": { ar: "اختر النوع",     en: "Select type" },
+  "quote.stage":       { ar: "مرحلة الوحدة", en: "Current unit stage" },
+  "quote.stagePh":     { ar: "اختر مرحلة التشطيب", en: "Select stage" },
+  "quote.submitting":  { ar: "جارٍ الإرسال والتسجيل…", en: "Submitting & registering…" },
+  "quote.successTitle": { ar: "تم تسجيل طلبك بنجاح!", en: "Request Registered Successfully!" },
+  "quote.successRef":  { ar: "رقم المرجع", en: "Reference ID" },
+  "quote.successCta":  { ar: "متابعة المحادثة في واتساب", en: "Continue in WhatsApp" },
+
+  // Cost Estimator
+  "estimator.eyebrow":     { ar: "حاسبة التشطيب الشفافة",                  en: "Transparent Finishing Calculator" },
+  "estimator.title":       { ar: "احسب تكلفة تشطيب وحدتك بدقة",           en: "Estimate Your Turnkey Finishing Cost" },
+  "estimator.subtitle":    {
+    ar: "حدد مساحة وحدتك والباقة المناسبة للاطلاع على ميزانية التنفيذ التقديرية بالجنيه المصري وجدول التسليم.",
+    en: "Select your unit area and preferred package to preview the estimated turnkey budget in EGP and delivery timeframe.",
+  },
+  "estimator.areaLabel":   { ar: "مساحة الوحدة الإجمالية",                 en: "Total Unit Area" },
+  "estimator.areaUnit":    { ar: "م²",                                    en: "m²" },
+  "estimator.packageLabel":{ ar: "اختر باقة التشطيب",                     en: "Select Finishing Package" },
+  "estimator.rateUnit":    { ar: "ج.م / م²",                              en: "EGP / m²" },
+  "estimator.estBudget":   { ar: "الميزانية التقديرية الإجمالية",           en: "Estimated Total Budget" },
+  "estimator.turnaround":  { ar: "مدة التنفيذ المتوقعة",                  en: "Estimated Turnaround" },
+  "estimator.months":      { ar: "أشهر",                                  en: "Months" },
+  "estimator.included":    { ar: "المواصفات وما تشمله الباقة",            en: "What's Included in This Tier" },
+  "estimator.bookSurvey":  { ar: "احجز معاينة وجدول كميات مفصل (BOQ)",     en: "Book Site Survey & Detailed BOQ" },
+  "estimator.simulateCta": { ar: "خصّص الخامات في محاكي 3D",              en: "Customize Materials in 3D Simulator" },
+  "estimator.disclaimer":  {
+    ar: "* التكلفة تقديرية استرشادية بناءً على خامات 2026. تعتمد التكلفة النهائية على المعاينة الهندسية للموقع وجدول الكميات (BOQ) التعاقدي.",
+    en: "* Estimated budget based on 2026 premium market rates. Final pricing is confirmed following physical site inspection and contract BOQ.",
+  },
+
+  // Before & After Transformations
+  "beforeAfter.eyebrow":     { ar: "رحلة التحول المعماري",             en: "Architectural Transformation" },
+  "beforeAfter.title":       { ar: "من المحارة إلى تسليم مفتاح راقٍ",   en: "From Core & Shell to Turnkey Luxury" },
+  "beforeAfter.subtitle":    {
+    ar: "اسحب المؤشر التفاعلي لمشاهدة الفارق الاستثنائي بين مرحلة الإنشاء الأولية والنتيجة المعمارية النهائية.",
+    en: "Drag the interactive slider to experience the dramatic transformation between raw construction and turnkey elegance.",
+  },
+  "beforeAfter.beforeLabel": { ar: "على المحارة / مرحلة أولى",         en: "Before: Core & Shell" },
+  "beforeAfter.afterLabel":  { ar: "تسليم مفتاح / النتيجة",            en: "After: Turnkey Handover" },
+  "beforeAfter.duration":    { ar: "المدة التعاقدية",                  en: "Contract Timeline" },
+  "beforeAfter.compound":    { ar: "الكمبوند والموقع",                 en: "Compound & Location" },
 
   // Contact
   "contact.eyebrow":  { ar: "تواصل",              en: "Get in touch" },
@@ -146,8 +196,14 @@ type Ctx = {
 
 const LocaleContext = createContext<Ctx | null>(null);
 
-export function LocaleProvider({ children }: { children: ReactNode }) {
-  const [locale, setLocaleState] = useState<Locale>("en");
+export function LocaleProvider({
+  children,
+  initialLocale = "en",
+}: {
+  children: ReactNode;
+  initialLocale?: Locale;
+}) {
+  const [locale, setLocaleState] = useState<Locale>(initialLocale);
 
   useClientLayoutEffect(() => {
     const stored = window.localStorage.getItem("locale") as Locale | null;
@@ -177,4 +233,12 @@ export function useLocale() {
   const ctx = useContext(LocaleContext);
   if (!ctx) throw new Error("useLocale must be used within LocaleProvider");
   return ctx;
+}
+
+export function useI18n() {
+  const ctx = useLocale();
+  return {
+    ...ctx,
+    isAr: ctx.locale === "ar",
+  };
 }

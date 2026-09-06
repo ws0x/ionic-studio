@@ -14,6 +14,9 @@ import { Contact } from "@/components/Contact";
 import { Footer } from "@/components/Footer";
 import { FloatingWhatsApp } from "@/components/FloatingWhatsApp";
 import { FoundersTeaser } from "@/components/FoundersTeaser";
+import { ClientLocations } from "@/components/ClientLocations";
+import CostEstimator from "@/components/CostEstimator";
+import BeforeAfter from "@/components/BeforeAfter";
 
 export default function Home() {
   return (
@@ -25,6 +28,9 @@ export default function Home() {
         <Stats />
         <Services />
         <Portfolio limit={6} showViewAll />
+        <BeforeAfter />
+        <ClientLocations />
+        <CostEstimator />
         <About />
         <FoundersTeaser />
         <Testimonials limit={3} showViewAll />

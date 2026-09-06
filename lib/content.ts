@@ -70,6 +70,9 @@ export type Project = {
   location: Bi;
   image: string;
   area?: string;
+  year?: string;
+  scope?: Bi;
+  highlights?: Bi[];
 };
 
 const U = (id: string, w = 1200) =>
@@ -87,61 +90,94 @@ export const projects: Project[] = [
   {
     title: { ar: "فيلا التجمع الخامس", en: "New Cairo Villa" },
     desc: {
-      ar: "فيلا سكنية فاخرة بتصميم داخلي معاصر وتشطيبات بمواد إيطالية.",
+      ar: "فيلا سكنية فاخرة بتصميم داخلي معاصر وتشطيبات بمواد إيطالية رخامية معمارية.",
       en: "Luxury residential villa with contemporary interiors and Italian finishing materials.",
     },
     category: { ar: "سكني", en: "Residential" },
     categoryKey: "residential",
     location: { ar: "القاهرة الجديدة", en: "New Cairo" },
     area: "650 m²",
+    year: "2025",
+    scope: { ar: "تشطيب كامل بمفتاح اليد + تصميم داخلي", en: "Turnkey Finishing + Interior Architecture" },
+    highlights: [
+      { ar: "رخام ستاتوريو إيطالي للأرضيات", en: "Italian Statuario Marble Flooring" },
+      { ar: "أنظمة إضاءة ذكية مخفية", en: "Architectural Concealed Smart Lighting" },
+      { ar: "تكسيات خشبية وتوزيع فراغات مخصص", en: "Bespoke Acoustic Wall Paneling" },
+    ],
     image: U("1600585154340-be6161a56a0c"),
   },
   {
     title: { ar: "شقة الشيخ زايد", en: "Sheikh Zayed Penthouse" },
     desc: {
-      ar: "بنتهاوس حديث بمساحات مفتوحة وأسقف مزدوجة الارتفاع.",
+      ar: "بنتهاوس حديث بمساحات مفتوحة وأسقف مزدوجة الارتفاع وتوزيع إضاءة طبيعية مدروس.",
       en: "Modern penthouse with open-plan living and double-height ceilings.",
     },
     category: { ar: "سكني", en: "Residential" },
     categoryKey: "residential",
     location: { ar: "الشيخ زايد", en: "Sheikh Zayed" },
     area: "420 m²",
+    year: "2024",
+    scope: { ar: "تصميم داخلي + تنفيذ ديكورات متكاملة", en: "Interior Design + Turnkey Execution" },
+    highlights: [
+      { ar: "أسقف مزدوجة مع جبسوم بورد معلق", en: "Double-Height Ceilings & Custom Gypsum" },
+      { ar: "أرضيات باركيه خشب طبيعي معالج", en: "Engineered Hardwood Flooring" },
+      { ar: "مطبخ ودريسنج بتفصيل معماري", en: "Custom Minimalist Kitchen & Dressing" },
+    ],
     image: U("1586023492125-27b2c045efd7"),
   },
   {
     title: { ar: "مكاتب العاصمة الإدارية", en: "New Capital Corporate HQ" },
     desc: {
-      ar: "مقر شركة بتصميم مؤسسي راقٍ يعكس هوية العلامة التجارية.",
+      ar: "مقر شركة بتصميم مؤسسي راقٍ يعكس هوية العلامة التجارية ويحقق أعلى معايير بيئة العمل.",
       en: "Corporate headquarters with premium institutional design reflecting brand identity.",
     },
     category: { ar: "مكاتب", en: "Office" },
     categoryKey: "office",
     location: { ar: "العاصمة الإدارية", en: "New Capital" },
     area: "1,200 m²",
+    year: "2024",
+    scope: { ar: "تشطيب مقرات ومكاتب متكامل (MEP + Fit-out)", en: "Complete Corporate Fit-out & MEP" },
+    highlights: [
+      { ar: "قواطع زجاجية عازلة للصوت", en: "Acoustic Glass Partitions" },
+      { ar: "قاعات اجتماعات ذكية بنظام أوتوميشن", en: "Automated Conference Suites" },
+      { ar: "أنظمة تكييف مركزي وكهرباء معتمدة", en: "Engineered Central HVAC & Electromechanical" },
+    ],
     image: U("1497366811353-6870744d04b2"),
   },
   {
     title: { ar: "بوتيك المعادي", en: "Maadi Luxury Boutique" },
     desc: {
-      ar: "محل بيع بالتجزئة بتصميم يُحوّل تجربة التسوق إلى فن.",
+      ar: "محل بيع بالتجزئة بتصميم يُحوّل تجربة التسوق إلى فن معماري ساحر وجذاب.",
       en: "Retail boutique that transforms the shopping experience into an art form.",
     },
     category: { ar: "تجاري", en: "Commercial" },
     categoryKey: "commercial",
     location: { ar: "المعادي", en: "Maadi" },
     area: "280 m²",
+    year: "2023",
+    scope: { ar: "تشطيب تجاري سريع بمواصفات عالمية", en: "Commercial Retail Fit-out" },
+    highlights: [
+      { ar: "واجهات زجاجية وتوزيع إضاءة مسرحي", en: "Custom Display Windows & Focal Lighting" },
+      { ar: "تشطيبات أسمنتية ميكروسيمنت فاخرة", en: "Premium Microcement Floor Finishes" },
+    ],
     image: U("1441986300917-64674bd600d8"),
   },
   {
     title: { ar: "منتجع الساحل الشمالي", en: "North Coast Resort Villa" },
     desc: {
-      ar: "فيلا ساحلية بأسلوب معماري متوسطي مع لمسات معاصرة راقية.",
+      ar: "فيلا ساحلية بأسلوب معماري متوسطي مع لمسات معاصرة راقية ومقاومة للعوامل الجوية.",
       en: "Coastal villa with Mediterranean architecture and refined contemporary touches.",
     },
     category: { ar: "سكني", en: "Residential" },
     categoryKey: "residential",
     location: { ar: "الساحل الشمالي", en: "North Coast" },
     area: "480 m²",
+    year: "2023",
+    scope: { ar: "تشطيب مصيفي متكامل وخامات مقاومة للرطوبة", en: "Coastal Turnkey Villa & Moisture-Proof Finishes" },
+    highlights: [
+      { ar: "تراسات خارجية بحجر طبيعي معالج", en: "Weatherproof Natural Stone Terraces" },
+      { ar: "ألوان شاطئية وأخشاب التيك المقاومة", en: "Teak Accents & Mediterranean Palette" },
+    ],
     image: U("1502672260266-1c1ef2d93688"),
   },
   {
@@ -299,7 +335,6 @@ export const founders: Founder[] = [
   },
 ];
 
-// ─── Quote form options ────────────────────────────────────────────────────────
 export const projectTypeOptions: { value: string; label: Bi }[] = [
   { value: "full-finishing", label: { ar: "تشطيب كامل", en: "Full finishing" } },
   { value: "interior-design", label: { ar: "تصميم داخلي", en: "Interior design" } },
@@ -309,3 +344,212 @@ export const projectTypeOptions: { value: string; label: Bi }[] = [
   { value: "hospitality", label: { ar: "ضيافة / مطعم", en: "Hospitality / restaurant" } },
   { value: "other", label: { ar: "أخرى", en: "Other" } },
 ];
+
+export const projectStageOptions: { value: string; label: Bi }[] = [
+  { value: "core_shell", label: { ar: "طوب أحمر / على المحارة (Core & Shell)", en: "Core & Shell / Red Brick" } },
+  { value: "semi_finished", label: { ar: "نصف تشطيب (تأسيس كهرباء وسباكة)", en: "Semi-Finished (MEP Rough-in)" } },
+  { value: "renovation", label: { ar: "تجديد شامل وإعادة تأهيل", en: "Full Renovation / Remodeling" } },
+  { value: "interior_3d", label: { ar: "تصميم داخلي ومحاكاة 3D فقط", en: "Interior Design & 3D Only" } },
+];
+
+export type PrimeLocation = {
+  name: Bi;
+  district: Bi;
+  compounds: Bi;
+};
+
+export const primeLocations: PrimeLocation[] = [
+  {
+    name: { ar: "القاهرة الجديدة", en: "New Cairo" },
+    district: { ar: "التجمع الخامس والمثلث الذهبي", en: "5th Settlement & Golden Square" },
+    compounds: { ar: "ميفيدا · بالم هيلز · قطامية ديونز", en: "Mivida · Palm Hills · Katameya Dunes" },
+  },
+  {
+    name: { ar: "الشيخ زايد وأكتوبر", en: "Sheikh Zayed & October" },
+    district: { ar: "غرب القاهرة", en: "West Cairo" },
+    compounds: { ar: "اليجريا · سوديك ويست · بيفرلي هيلز", en: "Allegria · SODIC West · Beverly Hills" },
+  },
+  {
+    name: { ar: "العاصمة الإدارية", en: "New Administrative Capital" },
+    district: { ar: "الحي المالي والدبلوماسي", en: "Financial & Diplomatic Districts" },
+    compounds: { ar: "أبراج ومقرات إدارية فاخرة", en: "Corporate HQs & Prestige Towers" },
+  },
+  {
+    name: { ar: "الساحل الشمالي", en: "North Coast" },
+    district: { ar: "الساحل الشرير ورأس الحكمة", en: "Sahel & Ras El Hekma" },
+    compounds: { ar: "هاسيندا · مراسي · ألماظة باي", en: "Hacienda · Marassi · Almaza Bay" },
+  },
+  {
+    name: { ar: "دمياط والدلتا", en: "Damietta & Delta" },
+    district: { ar: "الواجهة البحرية والمنصورة", en: "Waterfront & Mansoura" },
+    compounds: { ar: "فيلات سكنية ومقرات تجارية", en: "Signature Coastal & Commercial Villas" },
+  },
+];
+
+// ─── Finishing Packages (Cost Estimator) ──────────────────────────────────────
+export type FinishingPackage = {
+  id: "signature" | "prestige" | "bespoke";
+  name: Bi;
+  tagline: Bi;
+  minRate: number; // EGP / m2
+  maxRate: number; // EGP / m2
+  turnaroundMonths: number;
+  features: Bi[];
+};
+
+export const finishingPackages: FinishingPackage[] = [
+  {
+    id: "signature",
+    name: { ar: "سيجنتشر", en: "Signature" },
+    tagline: {
+      ar: "تشطيب راقٍ متوازن للمساحات السكنية العصرية",
+      en: "Refined turnkey finishes for modern living",
+    },
+    minRate: 9500,
+    maxRate: 12500,
+    turnaroundMonths: 3,
+    features: [
+      {
+        ar: "تأسيس سباكة وكهرباء معتمد بضمان 10 سنوات (السويدي / الشريف)",
+        en: "Certified MEP rough-in with 10-yr warranty (El Sewedy / El Sherif)",
+      },
+      {
+        ar: "أرضيات بورسلين فرز أول وأسقف جبس بورد مستوية",
+        en: "1st-choice porcelain tiles & flush gypsum-board ceilings",
+      },
+      {
+        ar: "دهانات جوتن فينوماستيك ومفاتيح شنايدر إلكتريك",
+        en: "Jotun Fenomastic luxury paints & Schneider Electric switches",
+      },
+      {
+        ar: "أطقم حمامات ديورافيت / إيديال وخلاطات مستوردة",
+        en: "Duravit / Ideal Standard sanitary ware & imported mixers",
+      },
+      {
+        ar: "إشراف هندسي دوري وجدول زمني ملزم بالعقد",
+        en: "Periodic engineering supervision & contractually binding schedule",
+      },
+    ],
+  },
+  {
+    id: "prestige",
+    name: { ar: "بريستيج", en: "Prestige" },
+    tagline: {
+      ar: "فخامة معمارية بمواد مستوردة وأنظمة سمارت",
+      en: "Architectural luxury with imported materials & smart tech",
+    },
+    minRate: 14000,
+    maxRate: 18500,
+    turnaroundMonths: 4,
+    features: [
+      {
+        ar: "رخام إيطالي أو إسباني مستورد لبهو الاستقبال والمعيشة",
+        en: "Imported Italian or Spanish marble for reception & living",
+      },
+      {
+        ar: "تجاليد جدارية خشبية وتنسيق إضاءة مخفية هندسية",
+        en: "Wood wall panelling & architectural indirect cove illumination",
+      },
+      {
+        ar: "تأسيس بنية سمارت هوم (تحكم بالإضاءة والتكييف)",
+        en: "Smart Home automation infrastructure (lighting & HVAC)",
+      },
+      {
+        ar: "أبواب قشرة أرو طبيعية وقطاعات ألومنيوم جامبو عازلة",
+        en: "Natural oak veneer solid doors & acoustic Jumbo aluminum sections",
+      },
+      {
+        ar: "محاكاة 3D كاملة وبث مباشر لمتابعة تقدم الموقع أسبوعياً",
+        en: "Full 3D simulation with weekly digital site progress updates",
+      },
+    ],
+  },
+  {
+    id: "bespoke",
+    name: { ar: "بيسبوك رويال", en: "Bespoke Royal" },
+    tagline: {
+      ar: "تصميم وتنفيذ استثنائي كاستم بلا أي تنازلات",
+      en: "Uncompromising haute-couture architectural execution",
+    },
+    minRate: 22000,
+    maxRate: 28000,
+    turnaroundMonths: 6,
+    features: [
+      {
+        ar: "رخام ستاتوريو / كلكتا بوكماتش وأرضيات باركيه أرو ماسيف",
+        en: "Statuario/Calacatta bookmatch marble & solid oak parquet",
+      },
+      {
+        ar: "نظام سمارت هوم متكامل (KNX/Control4: إضاءة، تكييف، صوتيات، ستائر)",
+        en: "Comprehensive Smart Home (KNX/Control4: lighting, HVAC, audio, shades)",
+      },
+      {
+        ar: "مطابخ ودريسنج روم كاستم مع إكسسوارات بلوم النمساوية",
+        en: "Custom designer kitchen & walk-in dressing with Austrian Blum fittings",
+      },
+      {
+        ar: "تكييف مركزي مخفي (Concealed / VRV) مع مخارج هواء خطية",
+        en: "Concealed / VRV central climate control with linear diffusers",
+      },
+      {
+        ar: "مدير مشروع مخصص لكل عميل مع ضمان شامل 3 سنوات على التشطيب",
+        en: "Dedicated senior project director & 3-year comprehensive warranty",
+      },
+    ],
+  },
+];
+
+// ─── Before & After Transformations ──────────────────────────────────────────
+export type BeforeAfterShowcase = {
+  id: string;
+  title: Bi;
+  compound: Bi;
+  location: Bi;
+  duration: Bi;
+  scope: Bi;
+  beforeImage: string;
+  afterImage: string;
+};
+
+export const beforeAfterCases: BeforeAfterShowcase[] = [
+  {
+    id: "mivida-reception",
+    title: { ar: "بهو استقبال فيلا ميفيدا", en: "Mivida Grand Villa Reception" },
+    compound: { ar: "كمبوند ميفيدا · إعمار مصر", en: "Mivida Compound · Emaar Misr" },
+    location: { ar: "القاهرة الجديدة", en: "New Cairo" },
+    duration: { ar: "4 أشهر", en: "4 Months" },
+    scope: {
+      ar: "من المحارة إلى تسليم مفتاح مع رخام ستاتوريو إيطالي وجبسوم بورد إضاءة مخفية",
+      en: "From raw plaster to turnkey handover with Italian Statuario marble & cove lighting",
+    },
+    beforeImage: U("1503387762-592deb58ef4e"),
+    afterImage: U("1600585154340-be6161a56a0c"),
+  },
+  {
+    id: "allegria-penthouse",
+    title: { ar: "بنتهاوس اليجريا بيفرلي هيلز", en: "Allegria Penthouse Residence" },
+    compound: { ar: "اليجريا · سوديك ويست", en: "Allegria · SODIC West" },
+    location: { ar: "الشيخ زايد", en: "Sheikh Zayed" },
+    duration: { ar: "3.5 أشهر", en: "3.5 Months" },
+    scope: {
+      ar: "تعديل معماري شامل، تكسيات أرو ماسيف، وتأسيس سمارت هوم كامل",
+      en: "Full spatial restructuring, natural oak cladding & full Smart Home automation",
+    },
+    beforeImage: U("1541888946425-d0fbb18086f6"),
+    afterImage: U("1586023492125-27b2c045efd7"),
+  },
+  {
+    id: "katameya-suite",
+    title: { ar: "جناح رويال قطامية ديونز", en: "Katameya Dunes Royal Suite" },
+    compound: { ar: "قطامية ديونز جولف", en: "Katameya Dunes Golf" },
+    location: { ar: "التجمع الخامس", en: "5th Settlement" },
+    duration: { ar: "5 أشهر", en: "5 Months" },
+    scope: {
+      ar: "تأسيس بنية تحتية MEP وتكسيات حوائط مخملية مع حمام رخامي ماستر",
+      en: "Complete MEP rough-in, acoustic wall paneling & master bookmatch marble bath",
+    },
+    beforeImage: U("1581094794329-c8112a89af12"),
+    afterImage: U("1600210492486-724fe5c67fb0"),
+  },
+];
+

@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { useLocale, type DictKey } from "@/lib/i18n";
 import { SectionHeading } from "./SectionHeading";
 import { Reveal } from "./Reveal";
@@ -14,12 +15,13 @@ export function About() {
       <div className="mx-auto grid max-w-7xl items-center gap-16 px-5 sm:px-8 lg:grid-cols-2">
         {/* Image */}
         <Reveal className="relative">
-          <div className="aspect-[3/4] overflow-hidden rounded-2xl">
-            <img
+          <div className="relative aspect-[3/4] overflow-hidden rounded-2xl">
+            <Image
               src="https://images.unsplash.com/photo-1503387762-592deb58ef4e?auto=format&fit=crop&w=900&q=80"
               alt="Ionic Design House architecture studio interior"
-              loading="lazy"
-              className="h-full w-full object-cover grayscale transition-transform duration-700 hover:scale-[1.02]"
+              fill
+              sizes="(max-width: 1024px) 100vw, 50vw"
+              className="object-cover grayscale transition-transform duration-700 hover:scale-[1.02]"
             />
           </div>
           {/* Floating stat badge */}
@@ -28,12 +30,13 @@ export function About() {
             <p className="mt-1 text-[11px] uppercase tracking-[0.15em] text-paper/60">{t("stats.years")}</p>
           </div>
           {/* Floating inset image */}
-          <div className="absolute -top-6 -start-0 hidden w-36 overflow-hidden rounded-2xl border-4 border-paper shadow-2xl lg:-start-8 lg:block">
-            <img
+          <div className="absolute -top-6 -start-0 hidden h-36 w-36 overflow-hidden rounded-2xl border-4 border-paper shadow-2xl lg:-start-8 lg:block">
+            <Image
               src="https://images.unsplash.com/photo-1581094794329-c8112a89af12?auto=format&fit=crop&w=400&q=80"
               alt="Ionic Design House project detail"
-              loading="lazy"
-              className="aspect-square h-full w-full object-cover grayscale"
+              fill
+              sizes="144px"
+              className="object-cover grayscale"
             />
           </div>
         </Reveal>

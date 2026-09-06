@@ -1,11 +1,13 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useMemo, useState, useEffect } from "react";
+import Image from "next/image";
 import Link from "next/link";
 import { useLocale } from "@/lib/i18n";
-import { projects, projectFilters, type Project } from "@/lib/content";
+import { projects as fallbackProjects, projectFilters, type Project } from "@/lib/content";
 import { SectionHeading } from "./SectionHeading";
 import { Reveal } from "./Reveal";
+import { ProjectModal } from "./ProjectModal";
 
 type Filter = Project["categoryKey"] | "all";
 
@@ -13,19 +15,39 @@ export function Portfolio({
   limit,
   showFilters = true,
   showViewAll = false,
+  initialProjects,
 }: {
   limit?: number;
   showFilters?: boolean;
   showViewAll?: boolean;
+  initialProjects?: Project[];
 }) {
   const { t, locale } = useLocale();
   const [filter, setFilter] = useState<Filter>("all");
+  const [projectList, setProjectList] = useState<Project[]>(initialProjects || fallbackProjects);
+  const [selectedProject, setSelectedProject] = useState<Project | null>(null);
+
+  useEffect(() => {
+    let active = true;
+    fetch("/api/content")
+      .then((res) => (res.ok ? res.json() : null))
+      .then((data) => {
+        if (active && data?.projects && Array.isArray(data.projects) && data.projects.length > 0) {
+          setProjectList(data.projects);
+        }
+      })
+      .catch(() => {});
+
+    return () => {
+      active = false;
+    };
+  }, []);
 
   const shown = useMemo(() => {
     const filtered =
-      filter === "all" ? projects : projects.filter((p) => p.categoryKey === filter);
+      filter === "all" ? projectList : projectList.filter((p) => p.categoryKey === filter);
     return limit ? filtered.slice(0, limit) : filtered;
-  }, [filter, limit]);
+  }, [filter, limit, projectList]);
 
   return (
     <section id="work" className="bg-mist py-24 md:py-36">
@@ -61,13 +83,15 @@ export function Portfolio({
               key={p.title.en}
               delay={(i % 3) * 60}
               as="article"
-              className="group relative aspect-[4/5] overflow-hidden rounded-2xl bg-ink cursor-default"
+              onClick={() => setSelectedProject(p)}
+              className="group relative aspect-[4/5] overflow-hidden rounded-2xl bg-ink cursor-pointer"
             >
-              <img
+              <Image
                 src={p.image}
                 alt={`${p.title.en}, luxury ${p.category.en.toLowerCase()} project by Ionic Design House`}
-                loading="lazy"
-                className="h-full w-full object-cover grayscale transition-all duration-700 ease-out group-hover:scale-[1.04] group-hover:grayscale-0"
+                fill
+                sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                className="object-cover grayscale transition-all duration-700 ease-out group-hover:scale-[1.04] group-hover:grayscale-0"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-ink/90 via-ink/20 to-transparent" />
 
@@ -78,14 +102,36 @@ export function Portfolio({
                 <h3 className="mt-3 text-xl font-bold text-paper">
                   {p.title[locale]}
                 </h3>
-                <p className="mt-1 flex items-center gap-1.5 text-xs text-paper/65 opacity-0 transition-opacity duration-500 group-hover:opacity-100">
-                  <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                    <path d="M12 21s7-6.4 7-11a7 7 0 10-14 0c0 4.6 7 11 7 11z" />
-                    <circle cx="12" cy="10" r="2.5" />
-                  </svg>
-                  {p.location[locale]}
-                  {p.area && <span className="ms-2 border-s border-paper/30 ps-2">{p.area}</span>}
-                </p>
+                <div className="mt-3 flex items-center justify-between gap-2">
+                  <p className="flex items-center gap-1.5 text-xs text-paper/75">
+                    <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                      <path d="M12 21s7-6.4 7-11a7 7 0 10-14 0c0 4.6 7 11 7 11z" />
+                      <circle cx="12" cy="10" r="2.5" />
+                    </svg>
+                    {p.location[locale]}
+                    {p.area && <span className="ms-2 border-s border-paper/30 ps-2">{p.area}</span>}
+                  </p>
+
+                  <Link
+                    href={
+                      p.title.en.includes("Villa")
+                        ? "/simulate?project=villa-reception"
+                        : p.title.en.includes("Penthouse")
+                        ? "/simulate?project=penthouse-master"
+                        : p.categoryKey === "office"
+                        ? "/simulate?project=corporate-office"
+                        : "/simulate"
+                    }
+                    onClick={(e) => e.stopPropagation()}
+                    className="inline-flex items-center gap-1 rounded-full bg-paper/20 px-2.5 py-1 text-[10px] font-semibold text-paper backdrop-blur-md transition-all hover:bg-paper hover:text-ink cursor-pointer"
+                  >
+                    <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                      <path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z" />
+                      <path d="M3.27 6.96L12 12.01l8.73-5.05M12 22.08V12" />
+                    </svg>
+                    <span>{t("work.simulateCTA")}</span>
+                  </Link>
+                </div>
               </div>
             </Reveal>
           ))}
@@ -102,6 +148,11 @@ export function Portfolio({
           </Reveal>
         )}
       </div>
+
+      <ProjectModal
+        project={selectedProject}
+        onClose={() => setSelectedProject(null)}
+      />
     </section>
   );
 }

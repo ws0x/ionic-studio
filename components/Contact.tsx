@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { useLocale } from "@/lib/i18n";
 import { site, waLink } from "@/lib/site";
 import { SectionHeading } from "./SectionHeading";
@@ -74,11 +75,12 @@ export function Contact() {
 
           {/* Right — decorative panel */}
           <Reveal className="relative min-h-80 overflow-hidden rounded-3xl bg-ink">
-            <img
+            <Image
               src="https://images.unsplash.com/photo-1487958449943-2429e8be8625?auto=format&fit=crop&w=900&q=80"
               alt="Ionic Design House studio"
-              loading="lazy"
-              className="h-full w-full object-cover opacity-40 grayscale"
+              fill
+              sizes="(max-width: 1024px) 100vw, 50vw"
+              className="object-cover opacity-40 grayscale"
             />
             <div className="absolute inset-0 bg-gradient-to-br from-ink/70 to-ink/30" />
             <div className="absolute inset-0 flex flex-col items-center justify-center p-8 text-center text-paper">

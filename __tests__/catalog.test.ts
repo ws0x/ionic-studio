@@ -2,7 +2,7 @@ import { describe, it, expect } from "vitest";
 import {
   materials,
   furniture,
-  demoProject,
+  simulationPresets,
   getMaterial,
   getFurniture,
   getSimulationPayload,
@@ -38,14 +38,21 @@ describe("catalog: integrity", () => {
     }
   });
 
-  it("demo project references existing materials", () => {
-    expect(getMaterial(demoProject.room.floorMaterialId)).toBeDefined();
-    expect(getMaterial(demoProject.room.wallMaterialId)).toBeDefined();
-  });
+  it("all simulation presets have valid dimensions and existing materials", () => {
+    const presetKeys = Object.keys(simulationPresets);
+    expect(presetKeys).toContain("demo");
+    expect(presetKeys).toContain("villa-reception");
+    expect(presetKeys).toContain("penthouse-master");
+    expect(presetKeys).toContain("corporate-office");
 
-  it("default floor material is a floor, wall is a wall", () => {
-    expect(getMaterial(demoProject.room.floorMaterialId)?.category).toBe("floor");
-    expect(getMaterial(demoProject.room.wallMaterialId)?.category).toBe("wall");
+    for (const key of presetKeys) {
+      const proj = simulationPresets[key];
+      expect(proj.room.size.w).toBeGreaterThan(0);
+      expect(proj.room.size.d).toBeGreaterThan(0);
+      expect(proj.room.size.h).toBeGreaterThan(0);
+      expect(getMaterial(proj.room.floorMaterialId)).toBeDefined();
+      expect(getMaterial(proj.room.wallMaterialId)).toBeDefined();
+    }
   });
 });
 
@@ -57,15 +64,18 @@ describe("catalog: lookups", () => {
 });
 
 describe("catalog: API payload (route logic)", () => {
-  it("returns the full payload for the demo id", () => {
-    const payload = getSimulationPayload("demo");
-    expect(payload).not.toBeNull();
-    expect(payload!.project.id).toBe("demo");
-    expect(payload!.materials.length).toBe(materials.length);
-    expect(payload!.furniture.length).toBe(furniture.length);
+  it("returns full payload for all registered simulation presets", () => {
+    for (const id of ["demo", "villa-reception", "penthouse-master", "corporate-office"]) {
+      const payload = getSimulationPayload(id);
+      expect(payload).not.toBeNull();
+      expect(payload!.project.id).toBe(id);
+      expect(payload!.materials.length).toBe(materials.length);
+      expect(payload!.furniture.length).toBe(furniture.length);
+    }
   });
 
   it("returns null for an unknown project id", () => {
     expect(getSimulationPayload("ghost")).toBeNull();
   });
 });
+

@@ -8,11 +8,16 @@ export function CameraBar({
   onScreenshot,
   onCopyLink,
   onWhatsApp,
+  onOpenBoq,
+  onOpenTour,
 }: {
   onScreenshot: () => void;
   onCopyLink: () => void;
   onWhatsApp: () => void;
+  onOpenBoq?: () => void;
+  onOpenTour?: () => void;
 }) {
+
   const { tx } = useLocale();
   const cameraMode = useSimStore((s) => s.cameraMode);
   const setCameraMode = useSimStore((s) => s.setCameraMode);
@@ -52,6 +57,37 @@ export function CameraBar({
         <IconButton label={tx({ ar: "لقطة", en: "Photo" })} onClick={onScreenshot} icon="M23 19a2 2 0 01-2 2H3a2 2 0 01-2-2V8a2 2 0 012-2h4l2-3h6l2 3h4a2 2 0 012 2z M12 17a4 4 0 100-8 4 4 0 000 8z" />
         {/* Copy link */}
         <IconButton label={tx({ ar: "رابط", en: "Link" })} onClick={onCopyLink} icon="M10 13a5 5 0 007 0l3-3a5 5 0 00-7-7l-1 1 M14 11a5 5 0 00-7 0l-3 3a5 5 0 007 7l1-1" />
+
+        {/* 360 Tour */}
+        {onOpenTour && (
+          <button
+            onClick={onOpenTour}
+            aria-label={tx({ ar: "جولة 360°", en: "360° Tour" })}
+            className="flex items-center gap-1.5 rounded-full bg-stone-900 hover:bg-stone-800 text-amber-400 font-bold px-3 py-2 text-[11px] shadow-sm transition-all cursor-pointer border border-amber-500/30"
+          >
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <circle cx="12" cy="12" r="9" />
+              <path d="M3.6 9h16.8M3.6 15h16.8" />
+              <path d="M11.5 3a17 17 0 000 18M12.5 3a17 17 0 010 18" />
+            </svg>
+            <span className="hidden sm:inline">{tx({ ar: "جولة 360°", en: "360° Tour" })}</span>
+          </button>
+        )}
+
+        {/* Request BOQ */}
+        {onOpenBoq && (
+          <button
+            onClick={onOpenBoq}
+            aria-label={tx({ ar: "طلب مقايسة", en: "Request BOQ" })}
+            className="flex items-center gap-1.5 rounded-full bg-amber-500 hover:bg-amber-400 text-stone-950 font-bold px-3 py-2 text-[11px] shadow-sm transition-all cursor-pointer"
+          >
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+            </svg>
+            <span className="hidden sm:inline">{tx({ ar: "طلب مقايسة", en: "Request BOQ" })}</span>
+          </button>
+        )}
+
         {/* WhatsApp */}
         <button
           onClick={onWhatsApp}

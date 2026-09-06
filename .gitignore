@@ -41,3 +41,14 @@ yarn-error.log*
 next-env.d.ts
 
 .vercel
+
+# local data & leads
+data/db/leads.json
+data/db/projects_tracking.json
+data/db/*.tmp
+*.tmp
+
+# uploaded assets
+public/uploads/*
+!public/uploads/.gitkeep
+

@@ -20,7 +20,8 @@ export function FloatingWhatsApp() {
       href={waLink(t("cta.whatsappDefault"))}
       target="_blank"
       rel="noopener noreferrer"
-      aria-label="WhatsApp"
+      aria-label={t("contact.whatsapp")}
+      title={t("contact.whatsapp")}
       className={`fixed bottom-5 end-5 z-40 flex h-14 w-14 items-center justify-center rounded-full bg-ink text-paper shadow-lg ring-1 ring-paper/10 transition-all duration-300 hover:scale-110 ${
         show ? "translate-y-0 opacity-100" : "pointer-events-none translate-y-4 opacity-0"
       }`}

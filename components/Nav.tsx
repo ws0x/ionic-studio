@@ -13,6 +13,7 @@ const links = [
   { href: "/testimonials", key: "nav.testimonials" },
   { href: "/#contact",     key: "nav.contact" },
   { href: "/simulate",     key: "nav.simulate" },
+  { href: "/track",        key: "nav.track" },
 ] as const;
 
 export function Nav() {
@@ -124,6 +125,8 @@ export function Nav() {
           {/* Burger */}
           <button
             onClick={() => setOpen((v) => !v)}
+            aria-expanded={open}
+            aria-controls="mobile-nav-menu"
             aria-label={open ? "Close menu" : "Open menu"}
             className="flex h-9 w-9 flex-col items-center justify-center gap-1.5 lg:hidden cursor-pointer"
           >
@@ -135,7 +138,12 @@ export function Nav() {
       </nav>
 
       {/* Mobile menu */}
-      <div className={`overflow-hidden bg-paper transition-[max-height] duration-500 lg:hidden ${open ? "max-h-screen border-b border-line" : "max-h-0"}`}>
+      <div
+        id="mobile-nav-menu"
+        role="region"
+        aria-label="Mobile Navigation Menu"
+        className={`overflow-hidden bg-paper transition-[max-height] duration-500 lg:hidden ${open ? "max-h-screen border-b border-line" : "max-h-0"}`}
+      >
         <div className="flex flex-col px-5 py-5">
           {links.map((l) => (
             <Link

@@ -34,20 +34,63 @@ export const furniture: FurnitureDef[] = [
   { id: "rug", name: { ar: "سجادة", en: "Area Rug" }, category: "rug", size: { w: 2.4, d: 1.6, h: 0.02 }, color: "#a8836b" },
 ];
 
-// Default demo project — a living room. Future: one record per client unit.
-export const demoProject: SimulationProject = {
-  id: "demo",
-  name: { ar: "غرفة معيشة نموذجية", en: "Demo Living Room" },
-  room: {
-    id: "living",
-    name: { ar: "غرفة المعيشة", en: "Living Room" },
-    size: { w: 6, d: 5, h: 3 },
-    floorMaterialId: "floor-oak",
-    wallMaterialId: "wall-white",
+// Presets for various architectural room archetypes
+export const simulationPresets: Record<string, SimulationProject> = {
+  demo: {
+    id: "demo",
+    name: { ar: "غرفة معيشة نموذجية", en: "Living Room" },
+    room: {
+      id: "living",
+      name: { ar: "غرفة المعيشة", en: "Living Room" },
+      size: { w: 6, d: 5, h: 3 },
+      floorMaterialId: "floor-oak",
+      wallMaterialId: "wall-white",
+    },
+    availableMaterials: materials.map((m) => m.id),
+    availableFurniture: furniture.map((f) => f.id),
   },
-  availableMaterials: materials.map((m) => m.id),
-  availableFurniture: furniture.map((f) => f.id),
+  "villa-reception": {
+    id: "villa-reception",
+    name: { ar: "صالون واستقبال فيلا", en: "Grand Villa Reception" },
+    room: {
+      id: "reception",
+      name: { ar: "صالون واستقبال فاخر", en: "Grand Salon & Reception" },
+      size: { w: 8, d: 6, h: 3.4 },
+      floorMaterialId: "floor-marble",
+      wallMaterialId: "wall-greige",
+    },
+    availableMaterials: materials.map((m) => m.id),
+    availableFurniture: furniture.map((f) => f.id),
+  },
+  "penthouse-master": {
+    id: "penthouse-master",
+    name: { ar: "جناح نوم رئيسي بنتهاوس", en: "Penthouse Master Suite" },
+    room: {
+      id: "master-bedroom",
+      name: { ar: "غرفة النوم الرئيسية", en: "Master Bedroom Suite" },
+      size: { w: 5.5, d: 4.5, h: 3 },
+      floorMaterialId: "floor-walnut",
+      wallMaterialId: "wall-charcoal",
+    },
+    availableMaterials: materials.map((m) => m.id),
+    availableFurniture: furniture.map((f) => f.id),
+  },
+  "corporate-office": {
+    id: "corporate-office",
+    name: { ar: "مكتب تنفيذي واجتماعات", en: "Executive Corporate Suite" },
+    room: {
+      id: "executive-office",
+      name: { ar: "مكتب تنفيذي راقٍ", en: "Executive Office" },
+      size: { w: 7, d: 5, h: 3.2 },
+      floorMaterialId: "floor-concrete",
+      wallMaterialId: "wall-sage",
+    },
+    availableMaterials: materials.map((m) => m.id),
+    availableFurniture: furniture.map((f) => f.id),
+  },
 };
+
+export const demoProject: SimulationProject = simulationPresets.demo;
 
 /** Look up helpers — used by both the API stub and the scene. */
 export function getMaterial(id: string): MaterialDef | undefined {
@@ -58,8 +101,9 @@ export function getFurniture(id: string): FurnitureDef | undefined {
   return furniture.find((f) => f.id === id);
 }
 
-/** Assemble the full payload for a project id (MVP: only "demo"). */
+/** Assemble the full payload for a project id. */
 export function getSimulationPayload(id: string): SimulationPayload | null {
-  if (id !== demoProject.id) return null;
-  return { project: demoProject, materials, furniture };
+  const project = simulationPresets[id];
+  if (!project) return null;
+  return { project, materials, furniture };
 }

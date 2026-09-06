@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { useLocale } from "@/lib/i18n";
 
 export function PageHero({
@@ -18,10 +19,13 @@ export function PageHero({
 
   return (
     <section className="grain relative flex min-h-[55vh] items-end overflow-hidden bg-ink pb-16 pt-36">
-      <img
+      <Image
         src={image}
         alt={title}
-        className="absolute inset-0 h-full w-full object-cover opacity-35 grayscale"
+        fill
+        priority
+        sizes="100vw"
+        className="object-cover opacity-35 grayscale"
       />
       <div className="absolute inset-0 bg-gradient-to-t from-ink/95 via-ink/50 to-transparent" />
       <div className="absolute top-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-paper/20 to-transparent" />

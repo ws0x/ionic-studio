@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { LocaleProvider, useLocale } from "@/lib/i18n";
 import { Nav } from "@/components/Nav";
 import { Footer } from "@/components/Footer";
@@ -30,12 +31,13 @@ function FoundersContent() {
               <Reveal
                 className={`${i % 2 === 1 ? "lg:order-2" : ""}`}
               >
-                <div className="aspect-[3/4] overflow-hidden rounded-2xl bg-mist">
-                  <img
+                <div className="relative aspect-[3/4] overflow-hidden rounded-2xl bg-mist">
+                  <Image
                     src={f.image}
                     alt={`${f.name.en}, ${f.title.en}, Ionic Design House`}
-                    loading="lazy"
-                    className="h-full w-full object-cover object-top grayscale transition-transform duration-700 hover:scale-[1.02]"
+                    fill
+                    sizes="(max-width: 1024px) 100vw, 50vw"
+                    className="object-cover object-top grayscale transition-transform duration-700 hover:scale-[1.02]"
                   />
                 </div>
               </Reveal>

@@ -7,18 +7,22 @@ export function Reveal({
   className = "",
   delay = 0,
   as: Tag = "div",
+  onClick,
 }: {
   children: ReactNode;
   className?: string;
   delay?: number;
   as?: keyof React.JSX.IntrinsicElements;
+  onClick?: () => void;
 }) {
   const ref = useRef<HTMLElement | null>(null);
-  const [shown, setShown] = useState(false);
+  const [shown, setShown] = useState(() => {
+    return typeof window !== "undefined" && typeof window.IntersectionObserver === "undefined";
+  });
 
   useEffect(() => {
     const el = ref.current;
-    if (!el) return;
+    if (!el || typeof IntersectionObserver === "undefined") return;
     const io = new IntersectionObserver(
       (entries) => {
         entries.forEach((e) => {
@@ -42,12 +46,14 @@ export function Reveal({
     style?: React.CSSProperties;
     className?: string;
     children?: ReactNode;
+    onClick?: () => void;
   }>;
   return (
     <Comp
       ref={ref}
       style={{ transitionDelay: `${delay}ms` }}
       className={`reveal ${shown ? "in" : ""} ${className}`}
+      onClick={onClick}
     >
       {children}
     </Comp>

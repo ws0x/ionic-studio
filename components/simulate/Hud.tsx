@@ -6,6 +6,7 @@ import { useLocale } from "@/lib/i18n";
 import { site } from "@/lib/site";
 import { useSimStore } from "@/lib/simulation/store";
 import type { MaterialDef, FurnitureDef, SimulationProject } from "@/lib/simulation/types";
+import { simulationPresets } from "@/lib/simulation/catalog";
 import { buildShareUrl, buildWhatsAppShare } from "@/lib/simulation/share";
 import type { CaptureFn } from "./SimulationCanvas";
 import { CameraBar } from "./panels/CameraBar";
@@ -13,6 +14,8 @@ import { MaterialsPanel } from "./panels/MaterialsPanel";
 import { FurniturePanel } from "./panels/FurniturePanel";
 import { LightingPanel } from "./panels/LightingPanel";
 import { SelectedToolbar } from "./panels/SelectedToolbar";
+import { BoqModal } from "./panels/BoqModal";
+import { PanoramaViewer } from "@/components/viewer/PanoramaViewer";
 
 type Tab = "materials" | "furniture" | "lighting";
 
@@ -35,11 +38,15 @@ export function Hud({
     () => typeof window === "undefined" || window.innerWidth >= 640
   );
   const [toast, setToast] = useState<string | null>(null);
+  const [boqOpen, setBoqOpen] = useState(false);
+  const [tourOpen, setTourOpen] = useState(false);
+
 
   const floorMaterialId = useSimStore((s) => s.floorMaterialId);
   const wallMaterialId = useSimStore((s) => s.wallMaterialId);
   const timeOfDay = useSimStore((s) => s.timeOfDay);
   const placements = useSimStore((s) => s.placements);
+  const init = useSimStore((s) => s.init);
 
   const showToast = (msg: string) => {
     setToast(msg);
@@ -81,9 +88,9 @@ export function Hud({
   };
 
   const tabs: { key: Tab; label: { ar: string; en: string }; icon: string }[] = [
-    { key: "materials", label: { ar: "الخامات", en: "Materials" }, icon: "M3 3h18v18H3z M3 9h18 M9 3v18" },
-    { key: "furniture", label: { ar: "الأثاث", en: "Furniture" }, icon: "M4 11V7a2 2 0 012-2h12a2 2 0 012 2v4 M3 11h18v6H3z M6 17v2 M18 17v2" },
-    { key: "lighting", label: { ar: "الإضاءة", en: "Lighting" }, icon: "M12 3v2 M12 19v2 M5 12H3 M21 12h-2 M12 8a4 4 0 100 8 4 4 0 000-8z" },
+    { key: "materials", label: { ar: "الخامات", en: "Materials" }, icon: "M4 6h16M4 12h16M4 18h16" },
+    { key: "furniture", label: { ar: "الأثاث", en: "Furniture" }, icon: "M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4" },
+    { key: "lighting",  label: { ar: "الإضاءة", en: "Lighting" },  icon: "M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" },
   ];
 
   return (
@@ -100,8 +107,29 @@ export function Hud({
           {tx({ ar: "العودة", en: "Back" })}
         </Link>
 
-        <div className="pointer-events-auto rounded-full bg-paper/90 px-4 py-2 text-center shadow-md backdrop-blur-sm">
-          <p className="text-xs font-bold text-ink">{project.name[locale]}</p>
+        {/* Space Switcher */}
+        <div className="pointer-events-auto relative rounded-full bg-paper/90 px-4 py-2 shadow-md backdrop-blur-sm">
+          <label htmlFor="space-select" className="sr-only">
+            {tx({ ar: "اختر الفراغ", en: "Select Space" })}
+          </label>
+          <select
+            id="space-select"
+            value={project.id}
+            onChange={(e) => {
+              const next = simulationPresets[e.target.value];
+              if (next) init(next);
+            }}
+            className="cursor-pointer appearance-none bg-transparent pe-5 text-xs font-bold text-ink outline-none"
+          >
+            {Object.values(simulationPresets).map((p) => (
+              <option key={p.id} value={p.id} className="text-ink">
+                {p.name[locale]} ({p.room.size.w}×{p.room.size.d}m)
+              </option>
+            ))}
+          </select>
+          <span className="pointer-events-none absolute end-2.5 top-1/2 -translate-y-1/2 text-[9px] text-platinum">
+            ▼
+          </span>
         </div>
 
         <button
@@ -121,7 +149,28 @@ export function Hud({
         onScreenshot={onScreenshot}
         onCopyLink={onCopyLink}
         onWhatsApp={onWhatsApp}
+        onOpenBoq={() => setBoqOpen(true)}
+        onOpenTour={() => setTourOpen(true)}
       />
+
+      {/* Architectural BOQ & Spec Modal */}
+      <BoqModal
+        project={project}
+        materials={materials}
+        furniture={furniture}
+        isOpen={boqOpen}
+        onClose={() => setBoqOpen(false)}
+      />
+
+      {/* 360 Virtual Tour Overlay Modal */}
+      {tourOpen && (
+        <div className="fixed inset-0 z-50 bg-black/85 backdrop-blur-md flex items-center justify-center p-2 sm:p-6 animate-in fade-in duration-200">
+          <div className="relative w-full max-w-5xl rounded-3xl overflow-hidden shadow-2xl border border-stone-800 bg-stone-950">
+            <PanoramaViewer onClose={() => setTourOpen(false)} />
+          </div>
+        </div>
+      )}
+
 
       {/* Right (LTR) / Left (RTL) side panel */}
       <div className="pointer-events-none absolute inset-y-0 end-0 z-20 flex max-h-screen items-stretch">

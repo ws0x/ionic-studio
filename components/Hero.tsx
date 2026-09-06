@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { useLocale } from "@/lib/i18n";
 import { waLink } from "@/lib/site";
 
@@ -12,10 +13,13 @@ export function Hero() {
       className="grain relative flex min-h-screen items-end overflow-hidden bg-ink pb-20 pt-32"
     >
       {/* Background */}
-      <img
+      <Image
         src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=1920&q=80"
         alt="Luxury interior design project by Ionic Design House"
-        className="absolute inset-0 h-full w-full object-cover opacity-45 grayscale"
+        fill
+        priority
+        sizes="100vw"
+        className="object-cover opacity-45 grayscale"
       />
       <div className="absolute inset-0 bg-gradient-to-t from-ink/95 via-ink/60 to-ink/20" />
 

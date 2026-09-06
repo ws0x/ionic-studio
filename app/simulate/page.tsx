@@ -1,10 +1,10 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import dynamic from "next/dynamic";
 import { LocaleProvider, useLocale } from "@/lib/i18n";
 import { useSimStore } from "@/lib/simulation/store";
-import { demoProject, materials, furniture } from "@/lib/simulation/catalog";
+import { demoProject, simulationPresets, materials, furniture } from "@/lib/simulation/catalog";
 import { decodeScene } from "@/lib/simulation/share";
 import { Hud } from "@/components/simulate/Hud";
 import { WebGLBoundary } from "@/components/simulate/WebGLBoundary";
@@ -31,25 +31,26 @@ function LoadingScene() {
 
 function SimulatorInner() {
   const { tx } = useLocale();
+  const project = useSimStore((s) => s.project);
   const init = useSimStore((s) => s.init);
   const hydrate = useSimStore((s) => s.hydrate);
   const captureRef = useRef<CaptureFn | null>(null);
-  const [ready, setReady] = useState(false);
 
   useEffect(() => {
-    init(demoProject);
+    const params = new URLSearchParams(window.location.search);
+    const projId = params.get("project");
+    const targetProject = (projId && simulationPresets[projId]) || demoProject;
+    init(targetProject);
 
     // Hydrate from a shared URL (?s=<encoded scene>)
-    const params = new URLSearchParams(window.location.search);
     const encoded = params.get("s");
     if (encoded) {
       const scene = decodeScene(encoded);
       if (scene) hydrate(scene);
     }
-    setReady(true);
   }, [init, hydrate]);
 
-  if (!ready) return <LoadingScene />;
+  if (!project) return <LoadingScene />;
 
   return (
     <div className="fixed inset-0 overflow-hidden bg-mist">

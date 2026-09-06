@@ -2,41 +2,78 @@
 
 import { useState } from "react";
 import { useLocale } from "@/lib/i18n";
-import { projectTypeOptions } from "@/lib/content";
+import { projectTypeOptions, projectStageOptions } from "@/lib/content";
 import { site, waLink } from "@/lib/site";
 import { SectionHeading } from "./SectionHeading";
 import { Reveal } from "./Reveal";
 
 export function Quote() {
   const { t, locale } = useLocale();
-  const [form, setForm] = useState({ name: "", phone: "", type: "", area: "", city: "", details: "" });
+  const [form, setForm] = useState({ name: "", phone: "", type: "", stage: "", area: "", city: "", details: "" });
   const [error, setError] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
+  const [leadId, setLeadId] = useState<string | null>(null);
+  const [fallbackUrl, setFallbackUrl] = useState<string | null>(null);
 
   const set = (k: keyof typeof form) =>
     (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) =>
       setForm((f) => ({ ...f, [k]: e.target.value }));
 
-  const submit = (e: React.FormEvent) => {
+  const submit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!form.name.trim() || !form.phone.trim()) { setError(true); return; }
     setError(false);
+    setSubmitting(true);
 
     const typeLabel = projectTypeOptions.find((o) => o.value === form.type)?.label[locale] ?? "";
-    const L = locale === "ar"
-      ? { head: "طلب عرض سعر جديد", name: "الاسم", phone: "الهاتف", type: "نوع المشروع", area: "المساحة", city: "المنطقة", details: "تفاصيل" }
-      : { head: "New quote request", name: "Name", phone: "Phone", type: "Project type", area: "Area", city: "City", details: "Details" };
+    const stageLabel = projectStageOptions.find((o) => o.value === form.stage)?.label[locale] ?? "";
 
-    const msg = [
-      `*${L.head}: ${site.name[locale]}*`,
-      `${L.name}: ${form.name}`,
-      `${L.phone}: ${form.phone}`,
-      `${L.type}: ${typeLabel}`,
-      form.area && `${L.area}: ${form.area} m²`,
-      form.city && `${L.city}: ${form.city}`,
-      form.details && `${L.details}: ${form.details}`,
-    ].filter(Boolean).join("\n");
+    try {
+      const res = await fetch("/api/quote", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: form.name,
+          phone: form.phone,
+          type: typeLabel,
+          stage: stageLabel,
+          area: form.area,
+          city: form.city,
+          details: form.details,
+        }),
+      });
 
-    window.open(waLink(msg), "_blank", "noopener,noreferrer");
+      const data = await res.json();
+      if (data.success && data.whatsappUrl) {
+        setLeadId(data.leadId);
+        setFallbackUrl(data.whatsappUrl);
+        window.open(data.whatsappUrl, "_blank", "noopener,noreferrer");
+      } else {
+        throw new Error(data.error || "Submission failed");
+      }
+    } catch {
+      // Offline / network fallback: directly open WhatsApp
+      const L = locale === "ar"
+        ? { head: "طلب عرض سعر جديد", name: "الاسم", phone: "الهاتف", type: "نوع المشروع", stage: "حالة الوحدة", area: "المساحة", city: "المنطقة", details: "تفاصيل" }
+        : { head: "New quote request", name: "Name", phone: "Phone", type: "Project type", stage: "Unit stage", area: "Area", city: "City", details: "Details" };
+
+      const msg = [
+        `*${L.head}: ${site.name[locale]}*`,
+        `${L.name}: ${form.name}`,
+        `${L.phone}: ${form.phone}`,
+        `${L.type}: ${typeLabel}`,
+        form.stage && `${L.stage}: ${stageLabel}`,
+        form.area && `${L.area}: ${form.area} m²`,
+        form.city && `${L.city}: ${form.city}`,
+        form.details && `${L.details}: ${form.details}`,
+      ].filter(Boolean).join("\n");
+
+      const directUrl = waLink(msg);
+      setFallbackUrl(directUrl);
+      window.open(directUrl, "_blank", "noopener,noreferrer");
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   const field = "h-12 w-full rounded-xl border border-line bg-mist px-4 text-sm text-ink outline-none transition-all placeholder:text-platinum/60 focus:border-ink focus:bg-paper focus:ring-0 cursor-text";
@@ -68,6 +105,14 @@ export function Quote() {
                   ))}
                 </select>
               </Labeled>
+              <Labeled label={t("quote.stage")}>
+                <select className={`${field} appearance-none cursor-pointer`} value={form.stage} onChange={set("stage")}>
+                  <option value="">{t("quote.stagePh")}</option>
+                  {projectStageOptions.map((o) => (
+                    <option key={o.value} value={o.value}>{o.label[locale]}</option>
+                  ))}
+                </select>
+              </Labeled>
               <Labeled label={t("quote.area")}>
                 <input className={field} value={form.area} onChange={set("area")} placeholder={t("quote.areaPh")} inputMode="numeric" />
               </Labeled>
@@ -87,14 +132,34 @@ export function Quote() {
               <p className="mt-4 text-xs font-medium text-ink">{t("quote.required")}</p>
             )}
 
+            {leadId && (
+              <div className="mt-6 rounded-2xl border border-line bg-mist p-5">
+                <p className="text-sm font-bold text-ink">{t("quote.successTitle")}</p>
+                <p className="mt-1 text-xs text-platinum">
+                  {t("quote.successRef")}: <span className="font-mono font-bold text-ink">#{leadId}</span>
+                </p>
+                {fallbackUrl && (
+                  <a
+                    href={fallbackUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="btn-secondary mt-4 inline-flex w-full justify-center text-xs"
+                  >
+                    {t("quote.successCta")}
+                  </a>
+                )}
+              </div>
+            )}
+
             <button
               type="submit"
-              className="btn-primary mt-7 w-full justify-center cursor-pointer"
+              disabled={submitting}
+              className="btn-primary mt-7 w-full justify-center cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
             >
               <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor">
                 <path d="M12 2a10 10 0 00-8.6 15l-1.3 4.8 4.9-1.3A10 10 0 1012 2zm4.4 12c-.2-.1-1.4-.7-1.6-.8s-.4-.1-.6.1-.6.8-.8 1-.3.2-.5.1a6.5 6.5 0 01-1.9-1.2 7.2 7.2 0 01-1.3-1.7c-.1-.2 0-.4.1-.5l.4-.5.3-.5v-.4l-.8-1.9c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 00-.7.3A2.8 2.8 0 006 8.8a4.9 4.9 0 001 2.6 11 11 0 004.3 3.8c.6.3 1.1.4 1.5.5a3.5 3.5 0 001.6.1 2.6 2.6 0 001.7-1.2 2.1 2.1 0 00.2-1.2c-.1-.1-.3-.2-.5-.3z" />
               </svg>
-              {t("quote.submit")}
+              {submitting ? t("quote.submitting") : t("quote.submit")}
             </button>
           </form>
         </Reveal>

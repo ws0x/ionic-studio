@@ -9,7 +9,9 @@ export default defineConfig({
     globals: true,
     setupFiles: ["./vitest.setup.ts"],
     include: ["__tests__/**/*.test.{ts,tsx}"],
+    fileParallelism: false,
   },
+
   resolve: {
     alias: {
       "@": fileURLToPath(new URL("./", import.meta.url)),

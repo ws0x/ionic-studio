@@ -8,7 +8,8 @@
     "start": "next start",
     "lint": "eslint",
     "test": "vitest run",
-    "test:watch": "vitest"
+    "test:watch": "vitest",
+    "check": "npm run lint && npm test && npm run build"
   },
   "dependencies": {
     "@react-three/drei": "^10.7.7",

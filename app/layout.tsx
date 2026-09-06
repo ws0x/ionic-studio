@@ -80,10 +80,80 @@ export const viewport: Viewport = {
   initialScale: 1,
 };
 
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": ["HomeAndConstructionBusiness", "ProfessionalService"],
+      "@id": `${SITE}/#organization`,
+      name: "Ionic Design House | دار أيونيك للتصميم والتشطيبات الفاخرة",
+      alternateName: "Ionic Studio Egypt",
+      url: SITE,
+      logo: `${SITE}/favicon.svg`,
+      image: `${SITE}/favicon.svg`,
+      telephone: "+201026040854",
+      priceRange: "$$$$",
+      address: {
+        "@type": "PostalAddress",
+        streetAddress: "Damietta & New Cairo",
+        addressLocality: "New Damietta / Cairo",
+        addressRegion: "Damietta / Cairo Governorate",
+        addressCountry: "EG",
+      },
+      geo: {
+        "@type": "GeoCoordinates",
+        latitude: 31.4175,
+        longitude: 31.8144,
+      },
+      openingHoursSpecification: [
+        {
+          "@type": "OpeningHoursSpecification",
+          dayOfWeek: ["Saturday", "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday"],
+          opens: "09:00",
+          closes: "20:00",
+        },
+      ],
+      founder: [
+        {
+          "@type": "Person",
+          name: "Eng. Yousef",
+          jobTitle: "Founder & Creative Design Director",
+        },
+        {
+          "@type": "Person",
+          name: "Eng. Al-Sayed",
+          jobTitle: "Co-Founder & Head of Civil Engineering",
+        },
+      ],
+      knowsAbout: [
+        "Interior Design",
+        "Turnkey Finishing",
+        "3D Architectural Simulation",
+        "Smart Home Integration",
+        "Civil & Structural Engineering",
+      ],
+    },
+    {
+      "@type": "WebSite",
+      "@id": `${SITE}/#website`,
+      url: SITE,
+      name: "Ionic Design House",
+      publisher: {
+        "@id": `${SITE}/#organization`,
+      },
+      inLanguage: ["ar", "en"],
+    },
+  ],
+};
+
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="en" dir="ltr" suppressHydrationWarning>
       <body className={`${cormorant.variable} ${dmSans.variable} ${cairo.variable} antialiased`}>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
         {children}
       </body>
     </html>

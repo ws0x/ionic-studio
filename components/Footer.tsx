@@ -10,6 +10,7 @@ const nav = [
   { href: "/founders",     key: "nav.founders" },
   { href: "/testimonials", key: "nav.testimonials" },
   { href: "/#contact",     key: "nav.contact" },
+  { href: "/track",        key: "nav.track" },
 ] as const;
 
 function InstagramIcon() {

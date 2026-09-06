@@ -1,6 +1,5 @@
 "use client";
 
-import type { Metadata } from "next";
 import { LocaleProvider, useLocale } from "@/lib/i18n";
 import { Nav } from "@/components/Nav";
 import { Footer } from "@/components/Footer";

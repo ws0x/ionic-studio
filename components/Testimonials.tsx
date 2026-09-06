@@ -54,7 +54,7 @@ export function Testimonials({
               <Stars count={tm.stars} />
 
               <blockquote className="mt-5 flex-1 text-base leading-relaxed text-paper/85 font-light">
-                "{tm.quote[locale]}"
+                &ldquo;{tm.quote[locale]}&rdquo;
               </blockquote>
 
               <figcaption className="mt-6 border-t border-paper/10 pt-5">
